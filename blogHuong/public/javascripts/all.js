@@ -172,7 +172,7 @@ $("#home-logout-btn").click(e => {
 												<ul id="logged-out-menu" class="nav navbar-nav navbar-right">
 					
 					<li>
-						<a href="/login">
+						<a href="/">
 							<i class="fas fa-sign-in visible-xs-inline"></i>
 							<span>Login</span>
 						</a>

@@ -215,16 +215,22 @@ export const editUserProfile = async params => {
   const { username, avatar, password } = params;
   try {
     // Tim info theo username
+    const hash = await bcrypt.hash(password, Configs.saltRounds);
+    
     const findUserInDB = await User.findOne({
       where: {
         username
       }
     });
-    if (password != findUserInDB.password && password) {
+    const compare = await bcrypt.compareSync(
+      password,
+      findUserInDB.password
+    );
+    if (!compare) {
       if (avatar) {
         const updateUserProfile = await User.update(
           {
-            password,
+            password: hash,
             avatar
           },
           {
@@ -237,7 +243,7 @@ export const editUserProfile = async params => {
       } else {
         const updateUserProfile = await User.update(
           {
-            password
+            password: hash
           },
           {
             where: {
@@ -248,7 +254,7 @@ export const editUserProfile = async params => {
         return updateUserProfile;
       }
     } else if (!password && avatar) {
-      console.log(password);
+      // console.log(password);
       //Neu k dien password thi chi update avatar thoi
       const updateUserProfile = await User.update(
         {
@@ -261,7 +267,7 @@ export const editUserProfile = async params => {
         }
       );
       return updateUserProfile;
-    } else if (!passport && !avatar) {
+    } else if (!password && !avatar) {
       return;
     }
   } catch (error) {

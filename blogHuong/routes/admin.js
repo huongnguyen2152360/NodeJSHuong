@@ -1,18 +1,24 @@
 var express = require("express");
 var router = express.Router();
 import * as UserController from "../controllers/UserController";
+import * as PostController from "../controllers/PostController";
 import * as Configs from "../configs/config";
 
-/* GET home page. */
+/* GET admin page. */
 router.get("/", async (req, res, next) => {
-  // console.log(req.session.user);
+  const {offset} = req.query; // thi kp viet router.post("/:offset") => ?offset=x
+  // console.log(req.session.user.username);
+  const posts = await PostController.allPostsByUsername(req.query, req.session.user);
   if (req.session.user) {
-    res.render("admin", { user: req.session.user });
+    res.render("admin", { user: req.session.user, posts });
+    // console.log('POSTS :', posts);
   } else {
     res.redirect("/");
   }
 });
 
+
+// EDIT PROFILE
 router.put("/editprofile", async (req, res, next) => {
   const { password, avatar, username, repassword } = req.body;
   try {
