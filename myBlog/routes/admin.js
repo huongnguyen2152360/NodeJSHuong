@@ -83,7 +83,6 @@ router.post("/newpost", async (req, res) => {
     const postbody = await PostController.createPost(req.body);
 
     if (postbody) {
-      // res.render("index")
       res.json({
         result:Message.SUCCESS,
         message: Message.POSTCREATESUCCESS,
