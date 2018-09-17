@@ -1,15 +1,15 @@
 import Post from "../models/Post";
+import User from '../models/User';
 
 // Tim tat ca bai viet
 export const allPostsInDB = async params => {
   const {offset} = params;
- 
   try {
     const findAllPosts = await Post.findAll({
       limit: 20,
       offset: offset ? offset * 20 : 0,
       order: [['id','DESC']],
-      attributes: ['title','content','tags','author','createdAt','updatedAt'],
+      // attributes: ['title','content','tags','author','createdAt','updatedAt'],
       required: true,
       include: [
         {

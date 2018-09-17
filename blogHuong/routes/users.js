@@ -17,6 +17,7 @@ router.get("/", async (req, res, next) => {
 // REGISTER
 router.post("/register", async (req, res) => {
   const { username, password, repassword, avatar } = req.body;
+  
   try {
     if (username && password === repassword) {
       const registerUser = await UserController.createNewUser(req.body); //createNewUser return newUser

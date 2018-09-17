@@ -4,11 +4,12 @@ import * as PostController from '../controllers/PostController';
 import * as Configs from '../configs/config';
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
+    const postss = await PostController.allPostsInDB(req.body);
     if (req.session.user) {
-        res.render('home', { user: req.session.user, postss: PostController.allPostsInDB });
+        res.render('home', { user: req.session.user, postss });
     } else {
-        res.render('home', {user: ""});
+        res.render('home', {user: "", postss});
     }
   });
 

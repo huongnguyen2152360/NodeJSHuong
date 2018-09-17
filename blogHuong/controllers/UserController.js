@@ -4,7 +4,9 @@ const passport = require("passport");
 const FacebookStrategy = require("passport-facebook").Strategy;
 const GoogleStrategy = require("passport-google-oauth20");
 const GithubStrategy = require("passport-github").Strategy;
+import bcrypt from "bcrypt";
 const keys = require("./keys");
+import * as Configs from "../configs/config";
 import Init from "../Utils/Init";
 // Tim tat ca user
 export const listAllUserInDB = async params => {
@@ -22,10 +24,11 @@ export const listAllUserInDB = async params => {
 export const createNewUser = async params => {
   const { username, password, avatar } = params;
   try {
+    const hash = await bcrypt.hash(password, Configs.saltRounds);
     const newUser = await User.create(
       {
         username,
-        password,
+        password: hash,
         avatar
       },
       {
@@ -50,7 +53,11 @@ export const userLogin = async params => {
     if (!username) {
       return;
     } else {
-      if (password === userInDB.password) {
+      const compare = await bcrypt.compareSync(
+				password,
+				userInDB.password
+			);
+      if (compare) {
         return userInDB;
       } else {
         return;
@@ -62,7 +69,8 @@ export const userLogin = async params => {
 };
 
 //              CONNECT WITH FACEBOOK
-passport.use(new FacebookStrategy(
+passport.use(
+  new FacebookStrategy(
     {
       // optins for fb strategy
       clientID: keys.facebook.clientID,
@@ -157,7 +165,8 @@ passport.use(
 );
 
 //           CONNECT WITH GITHUB
-passport.use(new GithubStrategy(
+passport.use(
+  new GithubStrategy(
     {
       //options for github strategy
       clientID: keys.github.clientID,
