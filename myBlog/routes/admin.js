@@ -78,8 +78,7 @@ router.get("/allposts/", async (req, res) => {
 
 // CREATE POST
 router.post("/newpost", async (req, res) => {
-  const { title, content, image, description, tags, author } = req.body;
-  console.log('content :', content);
+  const { title, content, image, description, tags, email } = req.body;
   try {
     const postbody = await PostController.createPost(req.body);
 

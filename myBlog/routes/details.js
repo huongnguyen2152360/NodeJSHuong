@@ -42,9 +42,11 @@ router.get("/topic/:id", async function(req, res, next) {
 
 router.post("/apiPostComment",async (req,res) => {
 	const { email, comment, parentid, postid } = req.body;
+	console.log(email);
 	try {
 		if(comment){
 			const addComment = await CommentController.createComment(req.body);
+			console.log(addComment);
 			if (addComment){
 				res.json({
 					result: Message.SUCCESS,
