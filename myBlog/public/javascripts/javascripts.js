@@ -21,7 +21,7 @@ function logOut(e) {
 			"Access-Control-Allow-Origin": "*"
 		},
 		async: true,
-		data: { username: usernameaa },
+		data: { email: usernameaa },
 		//   data: $("form").serialize(),
 		dataType: "json",
 		success: function(result) {
@@ -53,7 +53,7 @@ function logOutIndex(e) {
 			"Access-Control-Allow-Origin": "*"
 		},
 		async: true,
-		data: { username: usernameaa },
+		data: { email: usernameaa },
 		//   data: $("form").serialize(),
 		dataType: "json",
 		success: function(result) {
@@ -207,7 +207,7 @@ $("#save-form").submit(function saveBtn(e) {
 		},
 		async: true,
 		data: {
-			username: usernameFrForm,
+			email: usernameFrForm,
 			image: updatedImage,
 			password: updatedPass,
 			repassword: updatedRepass
@@ -413,7 +413,7 @@ function morePostWithScroll(e) {
 							<img component="user/picture" data-uid="4866" src="${
 								post.user.image
 							}" class="user-img" title="" data-original-title="${
-									post.user.username
+									post.user.email
 								}"">
 						</a>
 
@@ -495,7 +495,7 @@ function morePostWithScroll(e) {
 					<li component="post" class="" data-index="${index} " data-pid=" ${
 									comment.comment.id
 								} "
-					data-uid="${comment.comment.parentid}" data-username="${
+					data-uid="${comment.comment.parentid}" data-email="${
 									comment.comment.user.email
 								}"
 					data-userslug="${
@@ -523,7 +523,7 @@ function morePostWithScroll(e) {
 							<small class="pull-left">
 									<strong>
 											<a href="/user/profile/${comment.comment.user.email}" itemprop="author"
-													data-username="${comment.comment.user.email}" data-uid="${
+													data-email="${comment.comment.user.email}" data-uid="${
 									comment.comment.user.id
 								}">
 													${comment.comment.user.email}</a>
@@ -586,8 +586,8 @@ function morePostWithScroll(e) {
 																						comment
 																							.comment
 																							.user
-																							.username
-																					}" itemprop="author" data-username="${
+																							.email
+																					}" itemprop="author" data-email="${
 									comment.comment.user.email
 								}" data-uid="2">
 																					${comment.comment.user.email}</a>
@@ -696,7 +696,7 @@ $("#btn-submit").click(function(e) {
 	const statusUser = $("#updateStHere")
 		.attr("class")
 		.substr(27);
-	const username = $("#usernameNeed")
+	const email = $("#usernameNeed")
 		.text()
 		.trim();
 	const comment = $("textarea").froalaEditor("html.get");
@@ -716,7 +716,7 @@ $("#btn-submit").click(function(e) {
 				"Access-Control-Allow-Origin": "*"
 			},
 			async: true,
-			data: { username, comment, postid },
+			data: { email, comment, postid },
 			dataType: "json",
 			success: function(notice) {
 				if (notice.result === "success") {
@@ -739,7 +739,7 @@ $("#btn-submit").click(function(e) {
 					toastr["success"](`${notice.message}`, "Notification");
 					$("textarea").froalaEditor("html.set");
 					$(".posts").append(`
-					<li component="post" class="" data-index="0" data-pid="7" data-uid="0" data-username="${username}" data-userslug="${username}" itemscope="" itemtype="http://schema.org/Comment">
+					<li component="post" class="" data-index="0" data-pid="7" data-uid="0" data-email="${email}" data-userslug="${email}" itemscope="" itemtype="http://schema.org/Comment">
 								<a component="post/anchor" data-index="1" name="1"></a>
 
 								<meta itemprop="datePublished" content="2018-09-09T05:21:18.618Z">
@@ -747,7 +747,7 @@ $("#btn-submit").click(function(e) {
 
 								<div class="clearfix">
 									<div class="icon pull-left">
-										<a href="/user/profile/${username}">
+										<a href="/user/profile/${email}">
 											<img component="user/picture" data-uid="2" src="${imageUser}" itemprop="image" align="left">
 											<i component="user/status" class="fas fa-circle status ${statusUser}" title="${statusUser}"></i>
 										</a>
@@ -755,8 +755,8 @@ $("#btn-submit").click(function(e) {
 
 									<small class="pull-left">
 										<strong>
-											<a href="/user/profile/${username}" itemprop="author" data-username="${username}" data-uid="2">
-																					${username}</a>
+											<a href="/user/profile/${email}" itemprop="author" data-email="${email}" data-uid="2">
+																					${email}</a>
 										</strong>
 										<div class="visible-xs-inline-block visible-sm-inline-block visible-md-inline-block visible-lg-inline-block">
 											<a class="permalink" href="/details/7"><span class="timeago" title="Sun Sep 09 2018 12:21:18 GMT+0700 (Indochina Time)">a
@@ -784,7 +784,7 @@ $("#btn-submit").click(function(e) {
 								<div class="clearfix">
 									<div component="post/signature" data-uid="411" class="post-signature">
 										<p><a href="#" target="_blank" rel="nofollow">
-																			${username}</a></p>
+																			${email}</a></p>
 									</div>
 
 									<small class="pull-right">

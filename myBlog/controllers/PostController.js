@@ -22,7 +22,7 @@ export const listAllPosts = async params => {
 			include: [
 				{
 					model: User,
-					attributes: ["username", "image"], //Lay username va avatar cua user tu model User
+					attributes: ["email", "image"], //Lay username va avatar cua user tu model User
 					required: true
 				}
 			]
@@ -62,7 +62,7 @@ export const getPostById = async params => {
 		include: [
 			{
 				model: User,
-				attributes: ["username", "image"], //Lay username va avatar cua user tu model User
+				attributes: ["email", "image"], //Lay username va avatar cua user tu model User
 				required: true
 			}
 		]
@@ -76,10 +76,10 @@ export const getPostById = async params => {
 
 //CREATE POST
 export const createPost = async params => {
-	const { title, content, image, description, tags, author } = params;
+	const { title, content, image, description, tags, email } = params;
 	try {
 		const userFinded = await User.findOne({
-			where: { author }
+			where: { email }
 		});
 		if (userFinded && userFinded.isactive == "true") {
 			const newPost = await Post.create(
@@ -89,7 +89,7 @@ export const createPost = async params => {
 					image,
 					description,
 					tags,
-					author
+					author:email
 				},
 				{
 					fields: [

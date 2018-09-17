@@ -55,7 +55,7 @@ router.get("/activeAccount/:email", async (req, res) => {
 	try {
 		const checkAccount = await UserController.activeAccount(req.params);
 		if (checkAccount) {
-			res.render("activeAccount",{active});
+			res.render("activeAccount",{active:true});
 		} else {
 			res.render("activeAccount",{active:null, email});
 		}
