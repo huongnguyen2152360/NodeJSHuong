@@ -1,0 +1,24 @@
+.dnonee {
+    display: none;
+}
+#header-menu {
+    box-shadow: none;
+}
+.card {
+    box-shadow: none !important;
+}
+.btn.btn-link {
+    color: black !important;
+}
+.category-list {
+    display: block !important;
+}
+.navbar .dropdown-menu a {
+    font-size: 1.5rem;
+    padding: 5px 15px;
+    font-weight: 400;
+}
+.navbar .dropdown-menu a:hover {
+    background-color: #0000001a;
+    color: black !important;
+}

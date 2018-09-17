@@ -1,0 +1,4 @@
+
+[component="post/content"] img:not(.not-responsive):not([data-state]) {
+	display: none !important;
+}

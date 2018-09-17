@@ -1,0 +1,28 @@
+#admin-user-avatar {
+	width: 30px;
+	border-radius: 50%;
+}
+
+.admin-username-hidden {
+	display: none;
+}
+
+.admin-user-avatarbig {
+	position: relative;
+}
+
+#admin-userAvatar {
+	width: 200px;
+	text-align: center;
+}
+
+#admin-logout-btn {
+	color: #fff;
+}
+
+.statusStyle {
+	position: absolute;
+	z-index: 1;
+	top: -4%;
+	left: 61%;
+}
