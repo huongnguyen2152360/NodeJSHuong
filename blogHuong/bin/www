@@ -5,14 +5,14 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('bloghuong:server');
+var debug = require('debug')('myloginform:server');
 var http = require('http');
-
+import * as Configs from '../configs/config';
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || Configs.SVPORT);
 app.set('port', port);
 
 /**
@@ -82,6 +82,7 @@ function onError(error) {
  */
 
 function onListening() {
+  console.log(`Server Port connected successfully: ${Configs.SVPORT}`)
   var addr = server.address();
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr

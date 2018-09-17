@@ -1,11 +1,99 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>My Login Form</title>
+	<!-- BS Core CSS -->
+	<link href="/stylesheets/admincss/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- MD BOOTSTRAP PRO -->
+	<link href="https://namboss.blob.core.windows.net/huong/mdb.css" rel="stylesheet">
+
+	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:600'>
+	<!-- FONT AWESOME -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+	 crossorigin="anonymous">
+
+	<link rel="stylesheet" href="stylesheets/style.css">
+
+
+</head>
+
+<body>
+
+	<div class="login-wrap">
+		<div class="login-html">
+			<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+			<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+			<div class="login-form">
+				<form class="sign-in-htm" id="form-signIn">
+					<div class="group">
+						<label for="user" class="label">Username</label>
+						<input id="user" type="text" class="input" name="username">
+					</div>
+					<div class="group">
+						<label for="pass" class="label">Password</label>
+						<input id="pass" type="password" class="input" data-type="password" name="password">
+					</div>
+					<div class="group">
+						<input id="check" type="checkbox" class="check" checked>
+						<label for="check"><span class="icon"></span> Keep me Signed in</label>
+					</div>
+					<div class="group">
+						<input type="submit" class="button" value="Sign In">
+					</div>
+					<div class="row text-center pt-3">
+						<div class="col-4">
+							<a href="users/facebook" type="submit" class="button" id="user-loginwFb"><i class="fab fa-facebook-f"></i></a>
+						</div>
+						<div class="col-4">
+							<a href="users/google" type="submit" class="button" id="user-loginwFb"><i class="fab fa-google-plus-g"></i></a>
+						</div>
+						<div class="col-4">
+							<a href="users/github" type="submit" class="button" id="user-loginwFb"><i class="fab fa-github"></i></a>
+						</div>
+					</div>
+					<div class="hr"></div>
+					<div class="foot-lnk">
+						<a href="#forgot">Forgot Password?</a>
+					</div>
+				</form>
+				<form class="sign-up-htm" id="form-signUp">
+					<div class="group">
+						<label for="user" class="label">Username</label>
+						<input id="user" type="text" class="input" name="username">
+					</div>
+					<div class="group">
+						<label for="pass" class="label">Password</label>
+						<input id="pass" type="password" class="input" data-type="password" name="password">
+					</div>
+					<div class="group">
+						<label for="pass" class="label">Repeat Password</label>
+						<input id="pass" type="password" class="input" data-type="password" name="repassword">
+					</div>
+					<div class="group">
+						<label for="pass" class="label">Avatar URL</label>
+						<input id="pass" type="url" class="input" name="avatar">
+					</div>
+					<div class="group">
+						<button type="submit" class="button" value="submit">sign up</button>
+					</div>
+					<div class="hr"></div>
+					<div class="foot-lnk">
+						<label for="tab-1">Already Member?</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- Bootstrap core JavaScript-->
+	<script src="/stylesheets/admincss/vendor/jquery/jquery.min.js"></script>
+	<script src="/stylesheets/admincss/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!-- MDBOOTSTRAP JS -->
+	<script type="text/javascript" src="https://namboss.blob.core.windows.net/huong/mdb.min.js"></script>
+	<!-- FILE JS -->
+	<script src="/javascripts/all.js"></script>
+</body>
+
 </html>
