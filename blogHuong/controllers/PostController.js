@@ -86,3 +86,6 @@ export const editPost = async params => {
     throw error;
   }
 };
+
+// DELETE POST
+

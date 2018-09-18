@@ -248,21 +248,22 @@
               <tbody>
                 <% posts.forEach(function(post) {%>
                 <tr>
-                  <td>
+                  <td class="admin-post-title" data-id="<%= post.id %>">
                     <%= post.title %>
                   </td>
-                  <td>
+                  <td class="admin-post-content">
                     <%- post.content %>
                   </td>
-                  <td>
+                  <td class="admin-post-tags">
                     <%= post.tags %>
                   </td>
-                  <td>
+                  <td class="admin-post-date">
                     <%= post.createdAt %>
                   </td>
-                  <td class="text-center edit-btn"><button type="button" class="btn btn-outline-warning btn-rounded waves-effect admin-edit-btn" id="admin-edit-btn"><i
-                        class="fas fa-edit"></i></button></td>
-                  <td class="text-center edit-btn"><button type="button" class="btn btn-outline-danger btn-rounded waves-effect admin-edit-btn" id="admin-delete-btn"><i
+                  <td class="text-center edit-btn"><button type="button" class="btn btn-outline-warning btn-rounded waves-effect admin-edit-btn"><i
+                        class="fas fa-edit"></i></button>
+                      </td>
+                  <td class="text-center edit-btn"><button type="button" class="btn btn-outline-danger btn-rounded waves-effect admin-delete-btn"><i
                         class="fas fa-trash-alt"></i></button></td>
                 </tr>
                 <% }); %>
@@ -318,7 +319,7 @@
   </div>
 
     <!-- EDIT POST -->
-    <div class="dnonee" id="post-form-newpost">
+    <div class="dnonee" id="post-form-newpost1">
       <div component="composer" class="composer resizable" id="cmp-uuid-c82dab5b-8b86-4a31-b52d-62f33f4e0ad5" style="top: 53.0872%; visibility: visible;">
         <div class="composer-container">
             <nav class="navbar navbar-fixed-top mobile-navbar visible-xs visible-sm">
@@ -331,7 +332,7 @@
             </nav>
             <div class="row title-container">
                             <div class="col-lg-9 col-md-12">
-                                    <input class="title form-control" type="text" tabindex="1" placeholder="Enter your topic title here..." id="home-postContent" value="" name="title">
+                                    <input class="title form-control" type="text" tabindex="1" placeholder="Enter your topic title here..." id="admin-postContent" value="" name="title">
                 </div>
                             <div class="category-list-container col-lg-3 col-md-12">
             <select tabindex="3" class="form-control category-list" name="tags">
@@ -384,10 +385,10 @@
                     </div>
     
             <div class="btn-group pull-right action-bar hidden-sm hidden-xs">
-              <div style="display: none" class="home-post-author" name="author"><%= user.username %></div>
+              <div style="display: none" class="admin-post-author" name="author"><%= user.username %></div>
                         <button class="btn btn-warning composer-discard" data-action="discard" tabindex="-1" id="home-post-discard-editor"><i class="fas fa-times"></i> Discard</button>
     
-                        <button class="btn btn-primary composer-submit" data-action="post" tabindex="6" id="home-post-submit"><i class="fas fa-check"></i> Submit</button>
+                        <button class="btn btn-primary composer-submit" data-action="post" tabindex="6" id="admin-post-submit"><i class="fas fa-check"></i> Submit</button>
                                           
                         <ul class="dropdown-menu pull-right" role="menu">
                 <li><a href="#" data-switch-action="post">

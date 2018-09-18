@@ -282,28 +282,26 @@ $("#home-logout-btn").click(e => {
 					</li>
 				</ul>
       `);
-      $('.pull-right').html(`
+      $(".pull-right").html(`
         <a href="/"><button id="new_topic" class="btn btn-primary">Login to post</button></a>
-      `)
+      `);
     }
   });
 });
 
-
-
 // ____________________________________________________________________
 // CREATE POST (HOME)
-$('#home-post-submit').click(function(e) {
-  console.log("submit vao duoc roi neeeeeeeeee");
+$("#home-post-submit").click(function(e) {
   e.preventDefault(); // loai bo trang thai mac dinh (submit k reload nua)
   const url = `${location.protocol}//${document.domain}:${
     location.port
   }/home/newpost`;
-  const newtitle= $('#home-postContent').val();
-  const newtags = $('.category-list').val();
-  const newcontent = $('#needToPreview').val();
-  const newauthor = $('.home-post-author').text().trim();
-
+  const newtitle = $("#home-postContent").val();
+  const newtags = $(".category-list").val();
+  const newcontent = $("#needToPreview").val();
+  const newauthor = $(".home-post-author")
+    .text()
+    .trim();
   $.ajax({
     url: url,
     xhrFields: {
@@ -366,25 +364,21 @@ $('#home-post-submit').click(function(e) {
       }
     }
   });
-})
+});
 
 // SHOW EDITOR (HOME)
-$('#new_topic').click(e => {
- $('#post-form-newpost').toggleClass('dnonee');
+$("#new_topic").click(e => {
+  $("#post-form-newpost").toggleClass("dnonee");
 });
 
 //DISCARD EDITOR (HOME)
-$('#home-post-discard-editor').click((e) => {
-  $('#post-form-newpost').toggleClass('dnonee');
-})
+$("#home-post-discard-editor").click(e => {
+  $("#post-form-newpost").toggleClass("dnonee");
+});
 
 //BIGGER EDITOR (HOME)
 
-
 //PREVIEW EDITOR (HOME)
-
-
-
 
 // __________________________________ ADMIN _______________________________________
 // EDIT PROFILE (ADMIN)
@@ -476,13 +470,108 @@ $("#admin-form-updateProfile").submit(function EditBtn(e) {
   });
 });
 
-// SHOW EDITOR (ADMIN)
-$('#admin-edit-btn').click((e) => {
-  console.log('click vao edit duoc roi');
-  $('#post-form-newpost').toggleClass('dnonee');
-})
+// SHOW EDITOR WITH POST'S TEXT (ADMIN)
+$(".admin-edit-btn").click(function(e) {
+  // console.log('admin-edit-btn');
+  $("#post-form-newpost1").toggleClass("dnonee");
+  $("#admin-postContent").val(
+    `${$($(this).parent())
+      .parent()
+      .find(".admin-post-title")
+      .text()
+      .trim()}`
+  );
+  $(".category-list").val(
+    `${$($(this).parent())
+      .parent()
+      .find(".admin-post-tags")
+      .text()
+      .trim()}`
+  );
+  $("#needToPreview").val(
+    `${$($(this).parent())
+      .parent()
+      .find(".admin-post-content")
+      .text()
+      .trim()}`
+  );
+});
 
-// CLICK EDIT BUTTON, SHOW POST'S TEXT (ADMIN)
-// $('.admin-edit-btn').click(function(e) {
-//   console.log($($(this).parent()).parent().find('.sorting_1').text().trim());
-//   })
+// CLICK SUBMIT BTN TO EDIT POST (ADMIN)
+$("#admin-post-submit").click(function(e) {
+  e.preventDefault(); // loai bo trang thai mac dinh (submit k reload nua)
+  const url = `${location.protocol}//${document.domain}:${
+    location.port
+  }/admin/editpost`;
+  const newId = $('.admin-post-title').data(`id`);
+  const newtitle = $("#admin-postContent").val();
+  const newtags = $(".category-list").val();
+  const newcontent = $("#needToPreview").val();
+  const newauthor = $(".admin-post-author")
+    .text()
+    .trim();
+
+  $.ajax({
+    url: url,
+    xhrFields: {
+      withCredentials: true
+    },
+    crossDomain: true,
+    type: "PUT",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Access-Control-Allow-Origin": "*"
+    },
+    async: true,
+    data: {
+      id: newId,
+      title: newtitle,
+      tags: newtags,
+      content: newcontent,
+      author: newauthor
+    },
+    // data: $(".form-horizontal").serialize(),
+    dataType: "json",
+    success: function(result) {
+      // console.log("create thanh cong");
+      if (result.result == "success") {
+        toastr.options = {
+          closeButton: false,
+          debug: false,
+          newestOnTop: true,
+          progressBar: true,
+          positionClass: "toast-top-right",
+          preventDuplicates: false,
+          showDuration: 300,
+          hideDuration: 1000,
+          timeOut: 2000,
+          extendedTimeOut: 1000,
+          showEasing: "swing",
+          hideEasing: "linear",
+          showMethod: "fadeIn",
+          hideMethod: "fadeOut"
+        };
+        toastr["success"](`${result.message}`, "Notification");
+      } else if (result.result == "failed") {
+        // console.log(`khong create duoc`);
+        toastr.options = {
+          closeButton: false,
+          debug: false,
+          newestOnTop: true,
+          progressBar: true,
+          positionClass: "toast-top-right",
+          preventDuplicates: false,
+          showDuration: 300,
+          hideDuration: 1000,
+          timeOut: 2000,
+          extendedTimeOut: 1000,
+          showEasing: "swing",
+          hideEasing: "linear",
+          showMethod: "fadeIn",
+          hideMethod: "fadeOut"
+        };
+        toastr["error"](`${result.message}`, "Notification");
+      }
+    }
+  });
+});

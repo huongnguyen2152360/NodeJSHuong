@@ -31,7 +31,7 @@
 	font-size: 1.2rem;
 	color: #000000b3;
 }
-.admin-edit-btn {
+.admin-edit-btn, .admin-delete-btn {
 	cursor: pointer;
 	padding: 0.2rem 1.8rem !important;
 	font-size: 1.2rem;
@@ -279,4 +279,8 @@ button, input, optgroup, select, textarea {
 #cmp-uuid-c82dab5b-8b86-4a31-b52d-62f33f4e0ad5 {
 	width: 60%;
 	left: 40%;
+}
+.pagination .page-link:hover {
+    background-color: #0003;
+
 }
