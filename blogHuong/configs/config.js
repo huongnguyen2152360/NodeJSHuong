@@ -27,5 +27,7 @@ export const POST_CREATE_FAILED = "Post must include title, content and tags.";
 
 export const saltRounds = 10;
 
-export const POST_EDIT_SUCCESS = "Edited post successfully!";
+export const POST_EDIT_SUCCESS = "Edit post successfully!";
+
+export const POST_DELETE_SUCCESS = "Delete post successfully!";
 

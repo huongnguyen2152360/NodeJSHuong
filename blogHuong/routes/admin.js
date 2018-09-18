@@ -85,4 +85,21 @@ router.put("/editpost", async (req, res, next) => {
   }
 });
 
+// DELETE POST
+router.delete('/admin/deletepost', async(req,res,next) => {
+  const { id, title, content, tags, author } = req.body;
+  try {
+    const postToDelete = await PostController.deletePost(req.body);
+    res.json({
+      result: Configs.SUCCESS,
+      message: Configs.POST_DELETE_SUCCESS
+    })
+  } catch (error) {
+    res.json({
+      result: Configs.FAILED,
+      message: `Delete post failed! Error: ${error}.`
+    })
+  }
+})
+
 module.exports = router;

@@ -70,17 +70,19 @@ export const createNewPost = async params => {
 export const editPost = async params => {
   const { id, title, content, tags, author } = params;
   try {
-    const postEdited = await Post.update({
-      title,
-      content,
-      tags,
-      author
-    },
-    {
-      where: {
-        id
+    const postEdited = await Post.update(
+      {
+        title,
+        content,
+        tags,
+        author
+      },
+      {
+        where: {
+          id
+        }
       }
-    });
+    );
     return postEdited;
   } catch (error) {
     throw error;
@@ -88,4 +90,24 @@ export const editPost = async params => {
 };
 
 // DELETE POST
-
+export const deletePost = async params => {
+  const { id, title, content, tags, author } = params;
+  try {
+    const postDeleted = await Post.destroy(
+      {
+        title,
+        content,
+        tags,
+        author
+      },
+      {
+        where: {
+          id
+        }
+      }
+    );
+    return postDeleted;
+  } catch (error) {
+    throw error;
+  }
+};
