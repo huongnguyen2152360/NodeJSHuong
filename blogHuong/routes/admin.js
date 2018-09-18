@@ -6,9 +6,12 @@ import * as Configs from "../configs/config";
 
 /* GET admin page. */
 router.get("/", async (req, res, next) => {
-  const {offset} = req.query; // thi kp viet router.post("/:offset") => ?offset=x
+  const { offset } = req.query; // thi kp viet router.post("/:offset") => ?offset=x
   // console.log(req.session.user.username);
-  const posts = await PostController.allPostsByUsername(req.query, req.session.user);
+  const posts = await PostController.allPostsByUsername(
+    req.query,
+    req.session.user
+  );
   if (req.session.user) {
     res.render("admin", { user: req.session.user, posts });
     // console.log('POSTS :', posts);
@@ -17,12 +20,11 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-
 // EDIT PROFILE
 router.put("/editprofile", async (req, res, next) => {
   const { password, avatar, username, repassword } = req.body;
   try {
-    if (password === repassword && avatar || avatar) {
+    if ((password === repassword && avatar) || avatar) {
       const userUpdateInfo = await UserController.editUserProfile(req.body);
       if (userUpdateInfo) {
         (req.session.user = { avatar }),
@@ -40,10 +42,10 @@ router.put("/editprofile", async (req, res, next) => {
     } else if (password === repassword && !avatar) {
       const userUpdateInfo = await UserController.editUserProfile(req.body);
       if (userUpdateInfo) {
-          res.json({
-            result: Configs.SUCCESS,
-            message: Configs.USER_UPDATE_SUCCESS
-          });
+        res.json({
+          result: Configs.SUCCESS,
+          message: Configs.USER_UPDATE_SUCCESS
+        });
       } else {
         res.json({
           result: Configs.FAILED,
@@ -56,10 +58,31 @@ router.put("/editprofile", async (req, res, next) => {
         message: Configs.USER_UPDATE_PASSUNMATCHED
       });
     }
-      
-
   } catch (error) {
     throw error;
   }
 });
+
+// EDIT POST
+router.put("/editpost", async (req, res, next) => {
+  const { id, title, content, tags, author } = req.body;
+  try {
+    const postToEdit = await PostController.editPost(req.body);
+    if (postToEdit) {
+      res.json({
+        result: Configs.SUCCESS,
+        data: postToEdit,
+        message: Configs.POST_EDIT_SUCCESS
+      });
+    } else {
+      res.json({
+        result: Configs.FAILED,
+        message: Configs.POST_CREATE_FAILED
+      });
+    }
+  } catch (error) {
+    throw error;
+  }
+});
+
 module.exports = router;

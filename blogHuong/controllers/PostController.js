@@ -27,20 +27,18 @@ export const allPostsInDB = async params => {
 
 // All posts by username
 export const allPostsByUsername = async (query, session) => {
-  console.log(session)
-  const { offset} = query;
-  const {username} = session;
+  // console.log(session)
+  const { offset } = query;
+  const { username } = session;
   try {
-    const findPostByUsername = await Post.findAll(
-      {
-        limit: 20,
-        offset: offset ? offset * 20 : 0,
-        where: {
-          author: username
-        },
-        order: [["id", "DESC"]],
-      }
-    );
+    const findPostByUsername = await Post.findAll({
+      limit: 20,
+      offset: offset ? offset * 20 : 0,
+      where: {
+        author: username
+      },
+      order: [["id", "DESC"]]
+    });
     return findPostByUsername;
   } catch (error) {
     throw error;
@@ -63,6 +61,27 @@ export const createNewPost = async params => {
       }
     );
     return newPost;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// EDIT POST
+export const editPost = async params => {
+  const { id, title, content, tags, author } = params;
+  try {
+    const postEdited = await Post.update({
+      title,
+      content,
+      tags,
+      author
+    },
+    {
+      where: {
+        id
+      }
+    });
+    return postEdited;
   } catch (error) {
     throw error;
   }

@@ -56,7 +56,7 @@ export const userLogin = async params => {
       const compare = await bcrypt.compareSync(
 				password,
 				userInDB.password
-			);
+      );
       if (compare) {
         return userInDB;
       } else {
@@ -213,6 +213,7 @@ Init();
 //                EDIT PROFILE
 export const editUserProfile = async params => {
   const { username, avatar, password } = params;
+  // console.log('password :', password);
   try {
     // Tim info theo username
     const hash = await bcrypt.hash(password, Configs.saltRounds);
@@ -241,6 +242,7 @@ export const editUserProfile = async params => {
         );
         return updateUserProfile;
       } else {
+        // console.log("da vao else, khac pass cu, k co ava "+username);
         const updateUserProfile = await User.update(
           {
             password: hash

@@ -31,7 +31,7 @@ var myStore = new SequelizeStore({
 app.use(
   session({
     secret: "keyboard cute cat",
-    // store: myStore,
+    store: myStore,
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false },
