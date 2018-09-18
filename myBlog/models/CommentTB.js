@@ -28,6 +28,9 @@ const CommentTB = sequelize.define("comment", {
 		field: "updatedat",
 		type: Sequelize.DATE,
 		defaultValue: Sequelize.NOW
+	},
+	timecomment:{
+		type: Sequelize.INTEGER
 	}
 },{
 	// timestamps:false

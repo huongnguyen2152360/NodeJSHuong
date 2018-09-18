@@ -74,13 +74,13 @@ export function  mailupdatepass (email,password) {
 </tr><tr style="padding:0;text-align:left;vertical-align:top">
 <td style="Margin:0;background:#ffad1f;border:none;border-collapse:collapse!important;border-radius:3px;color:#fff;font-family:'Helvetica Neue LT','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:24px;margin:0;padding:0;text-align:left;vertical-align:top;word-wrap:break-word">
   <p>
-  <a href="http://localhost:3000/users/activeAccount/${email}" style="Margin:0;border:0 solid #ffad1f;border-radius:3px;color:#fff;display:inline-block;font-family:'Helvetica Neue LT','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.2em;margin:0;padding:.5em 1em;text-align:left;text-decoration:none" target="_blank" data-saferedirecturl="http://localhost:3000/users/activeAccount/${email}>Active Account</a></p></td>
+  <a href="http://localhost:3000/users/activeAccount/${email}" style="Margin:0;border:0 solid #ffad1f;border-radius:3px;color:#fff;display:inline-block;font-family:'Helvetica Neue LT','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.2em;margin:0;padding:.5em 1em;text-align:left;text-decoration:none" target="_blank" data-saferedirecturl="http://localhost:3000/users/activeAccount/${email}>Activate Account</a></p></td>
 </tr>
 </tbody>
 </table></td>
 </tr>
 </tbody>
-</table> <p style="Margin:0;Margin-bottom:1em;color:#657786;font-family:'Helvetica Neue LT','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:24px;margin:0;margin-bottom:1em;padding:0;text-align:left">Active Account </p>
+</table> <p style="Margin:0;Margin-bottom:1em;color:#657786;font-family:'Helvetica Neue LT','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:24px;margin:0;margin-bottom:1em;padding:0;text-align:left">Activate Account </p>
   </th>
 <th class="m_4709968536034523851m_-3646102424416116373expander" style="Margin:0;color:#657786;font-family:'Helvetica Neue LT','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:24px;margin:0;padding:0!important;text-align:left;width:0"></th>
 </tr>

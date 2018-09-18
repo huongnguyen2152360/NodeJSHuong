@@ -10,15 +10,13 @@ import * as CommentController from "../controllers/CommentController"
 router.get("/topic/:id", async function(req, res, next) {
 	const { id } = req.params;
 	try {
+		const updateView = await PostController.updatePostView(req.params)
 		const findPostById = await PostController.getPostById(req.params);
-		//Lay tat ca post trong db
-		// console.log("findPostById :", findPostById);
 
 		const inforAuthor = await UserController.getInfoByUsername(
 			findPostById.author
 		);
 		const getComment = await CommentController.listAllComment(req.params)
-		// console.log(getComment)
 		if (req.user) {
 			res.render("details", {
 				user: req.user,
@@ -42,11 +40,9 @@ router.get("/topic/:id", async function(req, res, next) {
 
 router.post("/apiPostComment",async (req,res) => {
 	const { email, comment, parentid, postid } = req.body;
-	console.log(email);
 	try {
 		if(comment){
 			const addComment = await CommentController.createComment(req.body);
-			console.log(addComment);
 			if (addComment){
 				res.json({
 					result: Message.SUCCESS,

@@ -8,16 +8,16 @@ export const listAllPosts = async params => {
 		const allPosts = await Post.findAll({
 			limit: 20,
 			offset: offset ? offset * 20 : 0,
-			order: [["id", "DESC"]],
-			attributes: [
-				"id",
-				"title",
-				"content",
-				"tags",
-				"description",
-				"createdAt",
-				"updatedAt"
-			],
+			order: [["timepost", "DESC"]],
+			// attributes: [
+			// 	"id",
+			// 	"title",
+			// 	"content",
+			// 	"tags",
+			// 	"description",
+			// 	"createdAt",
+			// 	"updatedAt"
+			// ],
 			required: true,
 			include: [
 				{
@@ -42,7 +42,7 @@ export const listAllPostsUsername = async (params, username) => {
 		where: {
 			author: username
 		},
-		order: [["id", "DESC"]]
+		order: [["timepost", "DESC"]]
 	});
 	try {
 		return allPostsUsername;
@@ -81,6 +81,7 @@ export const createPost = async params => {
 		const userFinded = await User.findOne({
 			where: { email }
 		});
+		const timepost = Date.now();
 		if (userFinded && userFinded.isactive == "true") {
 			const newPost = await Post.create(
 				{
@@ -89,7 +90,9 @@ export const createPost = async params => {
 					image,
 					description,
 					tags,
-					author:email
+					author:email,
+					view:0,
+					timepost
 				},
 				{
 					fields: [
@@ -98,7 +101,9 @@ export const createPost = async params => {
 						"image",
 						"description",
 						"tags",
-						"author"
+						"author",
+						"view",
+						"timepost"
 					]
 				}
 			);
@@ -111,7 +116,7 @@ export const createPost = async params => {
 
 //UPDATE POST
 export const updatePost = async (params, id) => {
-	const { title, content, image, description, tags, author } = params;
+	const { title, content, image, description, tags, author, view, timepost } = params;
 	try {
 		const userFinded = await User.findOne({
 			where: { author }
@@ -139,6 +144,29 @@ export const updatePost = async (params, id) => {
 		throw error;
 	}
 };
+
+//UPDATE POST VIEW
+export const updatePostView = async (params) =>{
+	const {id} = params
+	try {
+		const post = await Post.findOne({
+			where: { id }
+		});
+		post.view++
+		const editView = await Post.update(
+			{
+				view: post.view
+			},
+			{
+				where: {
+					id
+				}
+			}
+		)
+	} catch (error) {
+
+	}
+}
 
 //DELETE POST
 export const deletePost = async params => {

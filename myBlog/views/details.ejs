@@ -166,7 +166,7 @@
                                         <ul class="dropdown-menu dropdown-menu-right" role="menu">
 
                                             <li role="presentation">
-                                                <a component="post/favourite" role="menuitem" tabindex="-1" 
+                                                <a component="post/favourite" role="menuitem" tabindex="-1"
                                                     data-favourited="false">
 
                                                     <span class="favourite-text">Bookmark</span>
@@ -220,12 +220,9 @@
                                             <span class="hidden-xs">Loading More Posts</span> <i class="fas fa-refresh fa-spin"></i>
                                         </span>
 
+
                                         <div class="stats hidden-xs">
-                                            <span component="topic/post-count" class="human-readable-number" title="4">4</span><br>
-                                            <small>Posts</small>
-                                        </div>
-                                        <div class="stats hidden-xs">
-                                            <span class="human-readable-number" title="22">22</span><br>
+                                            <span class="human-readable-number" title="<%= postsid.view %>"><%= postsid.view %></span><br>
                                             <small>Views</small>
                                         </div>
 
@@ -292,12 +289,9 @@
                                             <span class="hidden-xs">Loading More Posts</span> <i class="fas fa-refresh fa-spin"></i>
                                         </span>
 
+
                                         <div class="stats hidden-xs">
-                                            <span component="topic/post-count" class="human-readable-number" title="4">4</span><br>
-                                            <small>Posts</small>
-                                        </div>
-                                        <div class="stats hidden-xs">
-                                            <span class="human-readable-number" title="34">34</span><br>
+                                            <span class="human-readable-number" title="<%= postsid.view %>"><%= postsid.view %></span><br>
                                             <small>Views</small>
                                         </div>
 
@@ -312,12 +306,6 @@
                                         </div>
 
                                         <a href="/users/login" class="btn btn-primary">Log in to reply</a>
-
-
-
-
-
-
 
 
                                     </div>
@@ -464,13 +452,8 @@
                                 <span class="loading-indicator btn pull-left hidden" done="0">
                                     <span class="hidden-xs">Loading More Posts</span> <i class="fas fa-refresh fa-spin"></i>
                                 </span>
-
                                 <div class="stats hidden-xs">
-                                    <span component="topic/post-count" class="human-readable-number" title="3">3</span><br>
-                                    <small>Posts</small>
-                                </div>
-                                <div class="stats hidden-xs">
-                                    <span class="human-readable-number" title="19">19</span><br>
+                                    <span class="human-readable-number" title="<%= postsid.view %>"><%= postsid.view %></span><br>
                                     <small>Views</small>
                                 </div>
                                 <% if(user) { %>

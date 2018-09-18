@@ -22,7 +22,7 @@ export const listAllComment = async params => {
 			include: [
 				{
 					model: CommentTB,
-					order: [["updatedAt", "DESC"]],
+					order: [["timecomments", "DESC"]],
 					// attributes: ["id", "image"], //Lay username va avatar cua user tu model User
 					required: true,
 					include: [
@@ -49,15 +49,17 @@ export const createComment = async params => {
 			where: { email }
 		});
 		if (userFinded && userFinded.isactive == "true") {
+			const timecomment = Date.now();
 			const newComment = await CommentTB.create(
 				{
 					email,
 					comment,
 					parentid: parentid ? parentid : 0,
-					postid
+					postid,
+					timecomment
 				},
 				{
-					fields: ["email", "comment", "parentid", "postid"]
+					fields: ["email", "comment", "parentid", "postid","timecomment"]
 				}
 			);
 			return newComment;

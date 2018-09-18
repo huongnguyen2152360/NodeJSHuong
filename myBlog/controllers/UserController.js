@@ -133,7 +133,6 @@ export const newUser = async params => {
 //Active
 export const checkTimeoutLink = async params => {
 	const { email } = params;
-
 	try {
 		const findUsername = await User.findOne({
 			where: {
@@ -159,6 +158,16 @@ export const sendLinkResetPassword = async params => {
 				email
 			}
 		});
+		const updateKey = await User.update(
+			{
+				key
+			},
+			{
+				where: {
+					email
+				}
+			}
+		);
 		if (findUsername) {
 			const mail = await nodemailer(email, email, key, null, true);
 			return true;
@@ -183,7 +192,8 @@ export const updatePassword = async params => {
 			const hash = await bcrypt.hash(password, Config.saltRounds);
 			const updatePass = await User.update(
 				{
-					password: hash
+					password: hash,
+					key:""
 				},
 				{
 					where: {
@@ -215,7 +225,8 @@ export const activeAccount = async params => {
 		if (parseInt(timeActive) <= 5) {
 			const updateActive = await User.update(
 				{
-					isactive: "true"
+					isactive: "true",
+					key:""
 				},
 				{
 					where: {

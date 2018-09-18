@@ -32,6 +32,12 @@ const Post = sequelize.define("post", {
   updatedAt: {
     field: 'updatedat',
     type: Sequelize.DATE
+  },
+  timepost:{
+		type: Sequelize.INTEGER
+  },
+  view: {
+    type: Sequelize.INTEGER
   }
 });
 

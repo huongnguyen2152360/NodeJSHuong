@@ -24,7 +24,7 @@ module.exports = async function(email, username,password, key, boo) {
 		mailOptions = {
 			from: '"BlogNodeJs 👻 " <nam.javascript@gmail.com>', // sender address
 			to: `${email}`, // list of receivers
-			subject: "Wellcome to Blog Nodejs. This is your password ✔", // Subject line
+			subject: "Welcome to Blog Nodejs. This is your password ✔", // Subject line
 			html:mailupdatepass(email,password)
 		};
 	}

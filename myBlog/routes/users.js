@@ -55,9 +55,9 @@ router.get("/activeAccount/:email", async (req, res) => {
 	try {
 		const checkAccount = await UserController.activeAccount(req.params);
 		if (checkAccount) {
-			res.render("activeAccount",{active:true});
+			res.render("activeAccount", { active: true });
 		} else {
-			res.render("activeAccount",{active:null, email});
+			res.render("activeAccount", { active: null, email });
 		}
 	} catch (error) {
 		console.log(error);
@@ -164,36 +164,35 @@ router.post("/apiLogin", async (req, res) => {
 //LOGIN LOCAL PASSPORT WITH AJAX CUSTOM CALLBACK
 
 router.post("/login", function(req, res, next) {
-	passport.authenticate(
-		"local",
-		function(err, user, info) {
-			if (err) {
-				res.json({
-					result: Message.FAILED,
-					data: null,
-					message: `error: ${err}`
-				});
-			}
-			if (!user) {
-				res.json({
-					result: Message.FAILED,
-					data: null,
-					message: Message.LOGINFAILED
-				});
-			} else {
-				req.session.status = "online";
-				req.session.save();
-				req.login(user, function(err) {
-					if (err) { return next(err); }
-					return res.json({
-						result: Message.SUCCESS,
-						data: null,
-						message: Message.LOGINSUCCESS
-					});
-				  });
-			}
+	passport.authenticate("local", function(err, user, info) {
+		if (err) {
+			res.json({
+				result: Message.FAILED,
+				data: null,
+				message: `error: ${err}`
+			});
 		}
-	)(req, res, next);
+		if (!user) {
+			res.json({
+				result: Message.FAILED,
+				data: null,
+				message: Message.LOGINFAILED
+			});
+		} else {
+			req.session.status = "online";
+			req.session.save();
+			req.login(user, function(err) {
+				if (err) {
+					return next(err);
+				}
+				return res.json({
+					result: Message.SUCCESS,
+					data: null,
+					message: Message.LOGINSUCCESS
+				});
+			});
+		}
+	})(req, res, next);
 });
 
 //LOGIN LOCAL PASSPORT WITH FORM
@@ -216,7 +215,6 @@ router.post("/apiRegister", async (req, res) => {
 	const { email, image, username } = req.body;
 	try {
 		const newbie = await UserController.newUser(req.body);
-		//  console.log(newbie)
 		if (!newbie) {
 			// if newbie tra ve null ---> truong hop da co username
 			res.json({
@@ -227,8 +225,11 @@ router.post("/apiRegister", async (req, res) => {
 		} else {
 			const updateSt = await UserController.updateStatus(
 				req.body,
-				"offline"
+				"online"
 			); // register xong, status = offlline
+			req.login(newbie, function(err) {
+				if (err) return;
+			});
 			res.json({
 				result: Message.SUCCESS,
 				data: {},
