@@ -95,12 +95,6 @@ export const deletePost = async params => {
   try {
     const postDeleted = await Post.destroy(
       {
-        title,
-        content,
-        tags,
-        author
-      },
-      {
         where: {
           id
         }

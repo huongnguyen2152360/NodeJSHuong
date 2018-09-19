@@ -3,14 +3,13 @@ var router = express.Router();
 const passport = require("passport");
 import * as UserController from "../controllers/UserController";
 import * as Configs from "../configs/config";
-import { userInfo } from "os";
 
 /* GET users listing. */
 router.get("/", async (req, res, next) => {
   if (req.session.user) {
     res.redirect("/home");
   } else {
-    res.render("/");
+    res.render("users");
   }
 });
 

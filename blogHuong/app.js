@@ -9,10 +9,10 @@ var session = require('express-session');
 var logger = require("morgan");
 const passport = require('passport');
 const bodyParser = require('body-parser');
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+const usersRouter = require("./routes/users");
 const adminRouter = require("./routes/admin");
 const homeRouter = require("./routes/home");
+const detailsRouter = require("./routes/details");
 
 var app = express();
 
@@ -57,10 +57,10 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.json());
 app.use(require('body-parser').urlencoded({ extended: true }));
 
-app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/admin", adminRouter);
-app.use("/home", homeRouter);
+app.use("/", homeRouter);
+app.use("/details", detailsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

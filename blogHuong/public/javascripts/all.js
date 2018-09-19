@@ -88,7 +88,7 @@ $("#form-signIn").submit(function(e) {
       if (result.result == "success") {
         window.location.href = `${location.protocol}//${document.domain}:${
           location.port
-        }/home`;
+        }`;
       } else if (result.result == "failed") {
         // console.log(result);
         toastr.options = {
@@ -113,41 +113,9 @@ $("#form-signIn").submit(function(e) {
   });
 });
 
-//LOGOUT
-$("#admin-logout-btn").click(function(e) {
-  console.log("vao click out");
-  // e.preventDefault(); // vi k su dung form de submit
-  const url = `${location.protocol}//${document.domain}:${
-    location.port
-  }/users/logout`;
-  // const usernameaa = $("#admin-username-hidden")
-  // 	.text()
-  // 	.trim();
-  $.ajax({
-    url: url,
-    xhrFields: {
-      withCredentials: true
-    },
-    crossDomain: true,
-    type: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      "Access-Control-Allow-Origin": "*"
-    },
-    async: true,
-    // data: { username: usernameaa },
-    // data: $("#form-signIn").serialize(),
-    dataType: "json",
-    success: function(result) {
-      // console.log("LOGOUT SUCCESSSSSSS");
-      window.location.href = `${location.protocol}//${document.domain}:${
-        location.port
-      }/`;
-    }
-  });
-});
 
-// LOG OUT HOME
+// ________________________________ HOME ______________________________________
+// LOG OUT (HOME)
 $("#home-logout-btn").click(e => {
   // console.log("click dc roi ne");
   const url = `${location.protocol}//${document.domain}:${
@@ -172,7 +140,7 @@ $("#home-logout-btn").click(e => {
 												<ul id="logged-out-menu" class="nav navbar-nav navbar-right">
 					
 					<li>
-						<a href="/">
+						<a href="/users">
 							<i class="fas fa-sign-in visible-xs-inline"></i>
 							<span>Login</span>
 						</a>
@@ -283,13 +251,12 @@ $("#home-logout-btn").click(e => {
 				</ul>
       `);
       $(".pull-right").html(`
-        <a href="/"><button id="new_topic" class="btn btn-primary">Login to post</button></a>
+        <a href="/users"><button id="new_topic" class="btn btn-primary">Login to post</button></a>
       `);
     }
   });
 });
 
-// ____________________________________________________________________
 // CREATE POST (HOME)
 $("#home-post-submit").click(function(e) {
   e.preventDefault(); // loai bo trang thai mac dinh (submit k reload nua)
@@ -381,6 +348,39 @@ $("#home-post-discard-editor").click(e => {
 //PREVIEW EDITOR (HOME)
 
 // __________________________________ ADMIN _______________________________________
+//LOGOUT (ADMIN)
+$("#admin-logout-btn").click(function(e) {
+  // e.preventDefault(); // vi k su dung form de submit
+  const url = `${location.protocol}//${document.domain}:${
+    location.port
+  }/users/logout`;
+  // const usernameaa = $("#admin-username-hidden")
+  // 	.text()
+  // 	.trim();
+  $.ajax({
+    url: url,
+    xhrFields: {
+      withCredentials: true
+    },
+    crossDomain: true,
+    type: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Access-Control-Allow-Origin": "*"
+    },
+    async: true,
+    // data: { username: usernameaa },
+    // data: $("#form-signIn").serialize(),
+    dataType: "json",
+    success: function(result) {
+      // console.log("LOGOUT SUCCESSSSSSS");
+      window.location.href = `${location.protocol}//${document.domain}:${
+        location.port
+      }`;
+    }
+  });
+});
+
 // EDIT PROFILE (ADMIN)
 $("#admin-form-updateProfile").submit(function EditBtn(e) {
   // console.log("submit vao duoc roi neeeeeeeeee");
@@ -503,7 +503,7 @@ $("#admin-post-submit").click(function(e) {
   const url = `${location.protocol}//${document.domain}:${
     location.port
   }/admin/editpost`;
-  const newId = $('.admin-post-title').data(`id`);
+  const newId = $(".admin-post-title").data(`id`);
   const newtitle = $("#admin-postContent").val();
   const newtags = $(".category-list").val();
   const newcontent = $("#needToPreview").val();
@@ -575,3 +575,79 @@ $("#admin-post-submit").click(function(e) {
     }
   });
 });
+
+// CLICK DELETE BTN TO DELETE POST (ADMIN)
+$('.admin-delete-btn').click((e) => {
+  const idToDelete = $($(e.target).parent()).parent().find('.admin-post-title').data(`id`); 
+  $("#sosureBtn").click(e => {
+    e.preventDefault();
+    const url = `${location.protocol}//${document.domain}:${
+      location.port
+    }/admin/deletepost`;
+    $.ajax({
+      url: url,
+      xhrFields: {
+        withCredentials: true
+      },
+      crossDomain: true,
+      type: "DELETE",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Access-Control-Allow-Origin": "*"
+      },
+      async: true,
+      data: {
+        id: idToDelete
+      },
+      // data: $(".form-horizontal").serialize(),
+      dataType: "json",
+      success: function(result) {
+        // console.log("create thanh cong");
+        if (result.result == "success") {
+          toastr.options = {
+            closeButton: false,
+            debug: false,
+            newestOnTop: true,
+            progressBar: true,
+            positionClass: "toast-top-right",
+            preventDuplicates: false,
+            showDuration: 300,
+            hideDuration: 1000,
+            timeOut: 2000,
+            extendedTimeOut: 1000,
+            showEasing: "swing",
+            hideEasing: "linear",
+            showMethod: "fadeIn",
+            hideMethod: "fadeOut"
+          };
+          toastr["success"](`${result.message}`, "Notification");
+          window.location.href = `${location.protocol}//${document.domain}:${
+          location.port
+        }/admin`;
+
+        } else if (result.result == "failed") {
+          // console.log(`khong create duoc`);
+          toastr.options = {
+            closeButton: false,
+            debug: false,
+            newestOnTop: true,
+            progressBar: true,
+            positionClass: "toast-top-right",
+            preventDuplicates: false,
+            showDuration: 300,
+            hideDuration: 1000,
+            timeOut: 2000,
+            extendedTimeOut: 1000,
+            showEasing: "swing",
+            hideEasing: "linear",
+            showMethod: "fadeIn",
+            hideMethod: "fadeOut"
+          };
+          toastr["error"](`${result.message}`, "Notification");
+        }
+      }
+    });
+  });
+})
+
+

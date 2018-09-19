@@ -8,15 +8,16 @@ import * as Configs from "../configs/config";
 router.get("/", async (req, res, next) => {
   const { offset } = req.query; // thi kp viet router.post("/:offset") => ?offset=x
   // console.log(req.session.user.username);
-  const posts = await PostController.allPostsByUsername(
-    req.query,
-    req.session.user
-  );
+  
   if (req.session.user) {
+    const posts = await PostController.allPostsByUsername(
+      req.query,
+      req.session.user
+    );
     res.render("admin", { user: req.session.user, posts });
     // console.log('POSTS :', posts);
   } else {
-    res.redirect("/");
+    res.redirect("/users");
   }
 });
 
@@ -86,7 +87,7 @@ router.put("/editpost", async (req, res, next) => {
 });
 
 // DELETE POST
-router.delete('/admin/deletepost', async(req,res,next) => {
+router.delete('/deletepost', async(req,res,next) => {
   const { id, title, content, tags, author } = req.body;
   try {
     const postToDelete = await PostController.deletePost(req.body);
