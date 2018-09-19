@@ -45,6 +45,29 @@ export const allPostsByUsername = async (query, session) => {
   }
 };
 
+// GET POST BY ID
+export const getPostByID = async params => {
+  const { id } = params;
+  try {
+    const findPostByID = await Post.findOne({
+      where: {
+        id
+      },
+      include: [
+        {
+          model: User,
+          attributes: ['username','avatar'], // Lay avatar cua username tu model User
+          required: true
+        }
+      ]
+    },
+    );
+    return findPostByID;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // CREATE NEW POST
 export const createNewPost = async params => {
   const { title, content, tags, author } = params;
@@ -93,13 +116,11 @@ export const editPost = async params => {
 export const deletePost = async params => {
   const { id, title, content, tags, author } = params;
   try {
-    const postDeleted = await Post.destroy(
-      {
-        where: {
-          id
-        }
+    const postDeleted = await Post.destroy({
+      where: {
+        id
       }
-    );
+    });
     return postDeleted;
   } catch (error) {
     throw error;

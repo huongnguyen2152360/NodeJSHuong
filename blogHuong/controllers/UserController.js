@@ -255,8 +255,8 @@ export const editUserProfile = async params => {
         );
         return updateUserProfile;
       }
-    } else if (!password && avatar) {
-      // console.log(password);
+    } else if (!password || password =="" && avatar) {
+      console.log('k co pass, co ava :', password);
       //Neu k dien password thi chi update avatar thoi
       const updateUserProfile = await User.update(
         {
@@ -269,7 +269,7 @@ export const editUserProfile = async params => {
         }
       );
       return updateUserProfile;
-    } else if (!password && !avatar) {
+    } else if (!password || password=="" && !avatar) {
       return;
     }
   } catch (error) {
