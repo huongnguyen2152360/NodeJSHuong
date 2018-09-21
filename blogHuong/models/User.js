@@ -9,7 +9,7 @@ const User = sequelize.define(
       type: Sequelize.INTEGER,
       primaryKey: true
     },
-    username: {
+    email: {
       type: Sequelize.STRING
     },
     password: {
@@ -24,6 +24,6 @@ const User = sequelize.define(
   }
 );
 
-User.hasMany(Post, {foreignKey: 'author', sourceKey: 'username'});
-Post.belongsTo(User, {foreignKey: 'author', targetKey: 'username'});
+User.hasMany(Post, {foreignKey: 'author', sourceKey: 'email'});
+Post.belongsTo(User, {foreignKey: 'author', targetKey: 'email'});
 export default User;

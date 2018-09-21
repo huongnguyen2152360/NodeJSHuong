@@ -9,7 +9,7 @@ export const DBPORT = "5432";
 export const FAILED = "failed";
 export const SUCCESS = "success";
 
-export const USER_REGIS_FAILED = "Username existed or Password unmatched!";
+export const USER_REGIS_FAILED = "Email existed or Password unmatched!";
 export const USER_REGIS_SUCCESS = "Register successfully!";
 
 export const USER_LOGIN_FAILED = "Check your username or password.";

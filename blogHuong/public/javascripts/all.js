@@ -1,3 +1,5 @@
+let isAjaxAvailable = true; //Ajax khong load, có the su dung ajax (available = true)
+
 // REGISTER
 $("#form-signUp").submit(function(e) {
   // console.log("helloooooo");
@@ -589,69 +591,78 @@ $('.admin-delete-btn').click(function(e) {
     const url = `${location.protocol}//${document.domain}:${
       location.port
     }/admin/deletepost`;
-    $.ajax({
-      url: url,
-      xhrFields: {
-        withCredentials: true
-      },
-      crossDomain: true,
-      type: "DELETE",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "Access-Control-Allow-Origin": "*"
-      },
-      async: true,
-      data: {
-        id: idToDelete
-      },
-      // data: $(".form-horizontal").serialize(),
-      dataType: "json",
-      success: function(result) {
-        // console.log("create thanh cong");
-        if (result.result == "success") {
-          toastr.options = {
-            closeButton: false,
-            debug: false,
-            newestOnTop: true,
-            progressBar: true,
-            positionClass: "toast-top-right",
-            preventDuplicates: false,
-            showDuration: 300,
-            hideDuration: 1000,
-            timeOut: 2000,
-            extendedTimeOut: 1000,
-            showEasing: "swing",
-            hideEasing: "linear",
-            showMethod: "fadeIn",
-            hideMethod: "fadeOut"
-          };
-          toastr["success"](`${result.message}`, "Notification");
-          window.location.href = `${location.protocol}//${document.domain}:${
-          location.port
-        }/admin`;
-
-        } else if (result.result == "failed") {
-          // console.log(`khong create duoc`);
-          toastr.options = {
-            closeButton: false,
-            debug: false,
-            newestOnTop: true,
-            progressBar: true,
-            positionClass: "toast-top-right",
-            preventDuplicates: false,
-            showDuration: 300,
-            hideDuration: 1000,
-            timeOut: 2000,
-            extendedTimeOut: 1000,
-            showEasing: "swing",
-            hideEasing: "linear",
-            showMethod: "fadeIn",
-            hideMethod: "fadeOut"
-          };
-          toastr["error"](`${result.message}`, "Notification");
+    if (isAjaxAvailable) {
+      // sử dụng phương pháp cắm cờ để check xem ajax có đang hoạt động không, false thì bắt đầu chạy ajax
+      isAjaxAvailable = !isAjaxAvailable; // nếu ajax mà đang chạy thì sẽ chuyển biến false thành true để ngăn không cho nó chạy lặp lại
+      $.ajax({
+        url: url,
+        xhrFields: {
+          withCredentials: true
+        },
+        crossDomain: true,
+        type: "DELETE",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Access-Control-Allow-Origin": "*"
+        },
+        async: true,
+        data: {
+          id: idToDelete
+        },
+        // data: $(".form-horizontal").serialize(),
+        dataType: "json",
+        success: function(result) {
+          // console.log("create thanh cong");
+          if (result.result == "success") {
+            toastr.options = {
+              closeButton: false,
+              debug: false,
+              newestOnTop: true,
+              progressBar: true,
+              positionClass: "toast-top-right",
+              preventDuplicates: false,
+              showDuration: 300,
+              hideDuration: 1000,
+              timeOut: 2000,
+              extendedTimeOut: 1000,
+              showEasing: "swing",
+              hideEasing: "linear",
+              showMethod: "fadeIn",
+              hideMethod: "fadeOut"
+            };
+            toastr["success"](`${result.message}`, "Notification");
+            window.location.href = `${location.protocol}//${document.domain}:${
+            location.port
+          }/admin`;
+  
+          } else if (result.result == "failed") {
+            // console.log(`khong create duoc`);
+            toastr.options = {
+              closeButton: false,
+              debug: false,
+              newestOnTop: true,
+              progressBar: true,
+              positionClass: "toast-top-right",
+              preventDuplicates: false,
+              showDuration: 300,
+              hideDuration: 1000,
+              timeOut: 2000,
+              extendedTimeOut: 1000,
+              showEasing: "swing",
+              hideEasing: "linear",
+              showMethod: "fadeIn",
+              hideMethod: "fadeOut"
+            };
+            toastr["error"](`${result.message}`, "Notification");
+          }
+        }, complete: function(result) {
+          
+          isAjaxAvailable = !isAjaxAvailable;
         }
-      }
-    });
+        // Success rồi thì Done ajax, giờ cần nó available (k cho nó load nữa)
+      }); 
+    }
+   
   });
 })
 

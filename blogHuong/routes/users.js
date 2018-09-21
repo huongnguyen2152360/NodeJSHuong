@@ -7,18 +7,21 @@ import * as Configs from "../configs/config";
 /* GET users listing. */
 router.get("/", async (req, res, next) => {
   if (req.session.user) {
-    res.redirect("/home");
+    res.redirect("/");
   } else {
     res.render("users");
   }
 });
 
+router.get("/forgotpass", async(req,res) => {
+  res.render("forgotpass");
+})
 // REGISTER
 router.post("/register", async (req, res) => {
-  const { username, password, repassword, avatar } = req.body;
+  const { email, password, repassword, avatar } = req.body;
   
   try {
-    if (username && password === repassword) {
+    if (email && password === repassword) {
       const registerUser = await UserController.createNewUser(req.body); //createNewUser return newUser
       res.json({
         result: "success",
@@ -43,7 +46,7 @@ router.post("/register", async (req, res) => {
 
 //LOG IN
 router.post("/login", async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
   try {
     const loginAlready = await UserController.userLogin(req.body);
     if (loginAlready) {

@@ -22,17 +22,17 @@ export const listAllUserInDB = async params => {
 
 // REGISTER
 export const createNewUser = async params => {
-  const { username, password, avatar } = params;
+  const { email, password, avatar } = params;
   try {
     const hash = await bcrypt.hash(password, Configs.saltRounds);
     const newUser = await User.create(
       {
-        username,
+        email,
         password: hash,
         avatar
       },
       {
-        fields: ["username", "password", "avatar"]
+        fields: ["email", "password", "avatar"]
       }
     );
     return newUser;
@@ -43,14 +43,14 @@ export const createNewUser = async params => {
 
 //LOGIN
 export const userLogin = async params => {
-  const { username, password } = params;
+  const { email, password } = params;
   try {
     const userInDB = await User.findOne({
       where: {
-        username
+        email
       }
     });
-    if (!username) {
+    if (!email) {
       return;
     } else {
       const compare = await bcrypt.compareSync(
@@ -79,7 +79,7 @@ passport.use(
       profileFields: keys.facebook.profileFields
     },
     async function(accessToken, refreshToken, profile, done) {
-      const username = profile.emails[0] ? profile.emails[0].value : profile.id;
+      const email = profile.emails[0] ? profile.emails[0].value : profile.id;
       const password = `${profile.id}password`;
       const avatar = profile.photos[0]
         ? profile.photos[0].value
@@ -88,7 +88,7 @@ passport.use(
       try {
         const findUserInDB = await User.findOne({
           where: {
-            username
+            email
           }
         });
         if (findUserInDB) {
@@ -96,12 +96,12 @@ passport.use(
         } else {
           const newUserFromFB = await User.create(
             {
-              username,
+              email,
               password,
               avatar
             },
             {
-              fields: ["username", "password", "avatar"]
+              fields: ["email", "password", "avatar"]
             }
           );
           done(null, newUserFromFB);
@@ -125,7 +125,7 @@ passport.use(
       callbackURL: "/users/google/redirect"
     },
     async function(accessToken, refreshToken, profile, done) {
-      const username = profile.emails[0] ? profile.emails[0].value : profile.id;
+      const email = profile.emails[0] ? profile.emails[0].value : profile.id;
       const password = `${profile.id}password`;
       const avatar = profile.photos[0]
         ? profile.photos[0].value
@@ -134,7 +134,7 @@ passport.use(
       try {
         const findUserInDB = await User.findOne({
           where: {
-            username
+            email
           }
         });
         if (findUserInDB) {
@@ -143,12 +143,12 @@ passport.use(
         } else {
           const createNewUser = await User.create(
             {
-              username,
+              email,
               password,
               avatar
             },
             {
-              fields: ["username", "password", "avatar"]
+              fields: ["email", "password", "avatar"]
             }
           );
           // console.log('createNewUser :', createNewUser);
@@ -175,7 +175,7 @@ passport.use(
       profileFields: keys.github.profileFields
     },
     async function(accessToken, refreshToken, profile, done) {
-      const username = profile.username;
+      const email = profile.email;
       const password = `${profile.id}password`;
       const avatar = profile.photos[0]
         ? profile.photos[0].value
@@ -183,7 +183,7 @@ passport.use(
       try {
         const findUserInDB = await User.findOne({
           where: {
-            username
+            email
           }
         });
         if (findUserInDB) {
@@ -191,12 +191,12 @@ passport.use(
         } else {
           const newUserFromGithub = await User.create(
             {
-              username,
+              email,
               password,
               avatar
             },
             {
-              fields: ["username", "password", "avatar"]
+              fields: ["email", "password", "avatar"]
             }
           );
           done(null, newUserFromGithub);
@@ -212,14 +212,14 @@ Init();
 
 //                EDIT PROFILE
 export const editUserProfile = async params => {
-  const { username, avatar, password } = params;
+  const { email, avatar, password } = params;
   // console.log('password :', password);
   try {
-    // Tim info theo username
+    // Tim info theo email
     const hash = await bcrypt.hash(password, Configs.saltRounds);
     const findUserInDB = await User.findOne({
       where: {
-        username
+        email
       }
     });
     const compare = await bcrypt.compareSync(
@@ -238,7 +238,7 @@ export const editUserProfile = async params => {
           },
           {
             where: {
-              username
+              email
             }
           }
         );
@@ -250,7 +250,7 @@ export const editUserProfile = async params => {
           },
           {
             where: {
-              username
+              email
             }
           }
         );
@@ -264,7 +264,7 @@ export const editUserProfile = async params => {
           },
           {
             where: {
-              username
+              email
             }
           }
         );
