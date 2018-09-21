@@ -25,11 +25,11 @@
             <ul id="logged-in-menu" class="nav navbar-nav navbar-right">
                 <li id="user_label" class="dropdown">
                     <div class="user_label_username" style="display:none">
-                        <%= user.username %>
+                        <%= user.email %>
                     </div>
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="user_dropdown" title=""
                         data-original-title="Profile">
-                        <img src="<%= user.avatar %>" alt="<%= user.username %>">
+                        <img src="<%= user.avatar %>" alt="<%= user.email %>">
                     </a>
                     <ul id="user-control-list" component="header/usercontrol" class="dropdown-menu" aria-labelledby="user_dropdown">
                         <li>

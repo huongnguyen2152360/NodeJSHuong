@@ -102,7 +102,7 @@
             <img src="<%= user.avatar %>" alt="User Avatar" id="admin-user-avatar">
           </div>
           <div class="admin-username-hidden">
-            <%= user.username %>
+            <%= user.email %>
           </div>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
@@ -170,9 +170,9 @@
         <!-- USER_EDIT_PROFILE -->
         <div class="account">
 
-          <div class="avatar avatar-lg avatar-rounded text-center" title="<%= user.username%>">
+          <div class="avatar avatar-lg avatar-rounded text-center" title="<%= user.email%>">
             <div class="admin-user-avatarbig">
-              <img src="<%= user.avatar%>" alt="<%= user.username%>" id="admin-userAvatar">
+              <img src="<%= user.avatar%>" alt="<%= user.email%>" id="admin-userAvatar">
               <div class="admin-userStatus"><i component="user/status" class="fa fa-circle status online statusStyle"
                   title="Online"></i></div>
             </div>
@@ -222,7 +222,7 @@
 
             <div class="col-md-5 col-sm-4 pt-4">
               <label class="control-label">Username: <span class="usernameAuthor">
-                  <%= user.username %></span></label>
+                  <%= user.email %></span></label>
             </div>
           </div>
         </div>
@@ -382,7 +382,7 @@
                 <div class="btn-toolbar formatting-bar">
 
             <div class="btn-group pull-right action-bar hidden-sm hidden-xs">
-              <div style="display: none" class="admin-post-author" name="author"><%= user.username %></div>
+              <div style="display: none" class="admin-post-author" name="author"><%= user.email %></div>
                         <button class="btn btn-warning composer-discard" data-action="discard" tabindex="-1" id="home-post-discard-editor"><i class="fas fa-times"></i> Discard</button>
     
                         <button class="btn btn-primary composer-submit" data-action="post" tabindex="6" id="admin-post-submit"><i class="fas fa-check"></i> Submit</button>
