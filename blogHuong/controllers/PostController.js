@@ -115,6 +115,7 @@ export const editPost = async params => {
 // DELETE POST
 export const deletePost = async params => {
   const { id, title, content, tags, author } = params;
+  console.log(`id :${id}`)
   try {
     const postDeleted = await Post.destroy({
       where: {

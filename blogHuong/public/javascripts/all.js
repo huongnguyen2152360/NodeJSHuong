@@ -262,8 +262,8 @@ $("#home-post-submit").click(function(e) {
   e.preventDefault(); // loai bo trang thai mac dinh (submit k reload nua)
   const url = `${location.protocol}//${document.domain}:${
     location.port
-  }/home/newpost`;
-  const newtitle = $("#home-postContent").val();
+  }/newpost`;
+  const newtitle = $('#home-postContent').val();
   const newtags = $(".category-list").val();
   const newcontent = $("#needToPreview").val();
   const newauthor = $(".home-post-author")
@@ -582,9 +582,9 @@ $("#admin-post-submit").click(function(e) {
 });
 
 // CLICK DELETE BTN TO DELETE POST (ADMIN)
-$('.admin-delete-btn').click((e) => {
-  const idToDelete = $($(e.target).parent()).parent().find('.admin-post-title').data(`id`); 
+$('.admin-delete-btn').click(function(e) {
   $("#sosureBtn").click(e => {
+    const idToDelete = $($(this).parent()).parent().find('.admin-post-title').data(`id`); 
     e.preventDefault();
     const url = `${location.protocol}//${document.domain}:${
       location.port
@@ -654,5 +654,6 @@ $('.admin-delete-btn').click((e) => {
     });
   });
 })
+
 
 

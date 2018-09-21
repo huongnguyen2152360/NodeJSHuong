@@ -25,3 +25,35 @@
 .no-margin {
     margin: 0 !important;
 }
+/* EDITOR */
+.admin-edit-btn, .admin-delete-btn {
+    cursor: pointer;
+    padding: 0.2rem 1.8rem !important;
+    font-size: 1.2rem;
+}
+.admin-froala-editor {
+    height: 600px;
+    top: 39%;
+    position: fixed;
+    z-index: 100;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,.12),0 1px 1px 1px rgba(0,0,0,.16);
+    width: 100%;
+    visibility: unset;
+}
+.formatting-bar {
+    justify-content: right;
+}
+.fr-element {
+    user-select: text;
+}
+.category-list {
+    display: block !important;
+    margin-top: 1.2rem;
+}
+.row.category-tag-row {
+    padding-bottom: 1rem;
+}
+.composer.resizable {
+    top: 40% !important;
+}
