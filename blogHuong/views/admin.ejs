@@ -351,22 +351,15 @@
   </div>
 
     <!-- EDIT POST -->
-      <div component="composer" class="composer resizable admin-froala-editor" id="post-form-newpost1" style="visibility: visible;">
+      <div component="composer" class="composer resizable admin-froala-editor dnonee" id="post-form-newpost1">
         <div class="composer-container">
-            <nav class="navbar navbar-fixed-top mobile-navbar visible-xs visible-sm">
-                <span class="pull-left">
-                    <button class="btn btn-primary composer-discard" data-action="discard" tabindex="-1"><i class="fas fa-times"></i></button>
-                </span>
-                <span class="pull-right">
-                    <button class="btn btn-primary composer-submit" data-action="post" tabindex="-1"><i class="fas fa-chevron-right"></i></button>
-                </span>
-            </nav>
-            <div class="row title-container">
+            
+            <div class="row title-container" data-id="0">
                             <div class="col-lg-9 col-md-12">
-                                    <input class="title form-control" type="text" tabindex="1" placeholder="Enter your topic title here..." id="admin-postContent" value="" name="title">
+                                    <input class="title form-control" type="text" tabindex="1" placeholder="Enter your topic title here..." id="admin-postContent" value="" name="title" data-id="">
                 </div>
                             <div class="category-list-container col-lg-3 col-md-12">
-            <select tabindex="3" class="form-control category-list" name="tags">
+            <select tabindex="3" class="mdb-select category-list" name="tags">
             <option value="General Discussion">General Discussion</option>
             <option value="Discuss A">Discuss A</option>
             <option value="Discuss A/Tag 1">&nbsp;&nbsp;&nbsp;&nbsp;• Tag 1</option>
@@ -421,7 +414,7 @@
   <script src="/stylesheets/admincss/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="/stylesheets/admincss/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <!-- <script src="/stylesheets/admincss/vendor/jquery-easing/jquery.easing.min.js"></script> -->
 
   <!-- Page level plugin JavaScript-->
   <script src="/stylesheets/admincss/vendor/datatables/jquery.dataTables.js"></script>
@@ -441,7 +434,7 @@
 
   <!-- FROALA EDITOR -->
   <!-- Include external JS libs. -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
 
@@ -451,7 +444,8 @@
   <!-- Initialize the editor. -->
   <script>
     $(function () {
-      $('textarea').froalaEditor({
+      $('textarea').froalaEditor(  
+      {
         height: 300
       })
     });

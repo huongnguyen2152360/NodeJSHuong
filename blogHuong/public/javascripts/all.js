@@ -474,6 +474,10 @@ $("#admin-form-updateProfile").submit(function EditBtn(e) {
 $(".admin-edit-btn").click(function(e) {
   // console.log('admin-edit-btn');
   $("#post-form-newpost1").toggleClass("dnonee");
+  
+  const getContentID = $($(this).parent())
+    .parent()
+    .find(".admin-post-title").data(`id`)
   $("#admin-postContent").val(
     `${$($(this).parent())
       .parent()
@@ -481,6 +485,7 @@ $(".admin-edit-btn").click(function(e) {
       .text()
       .trim()}`
   );
+  $("#admin-postContent").data("id",getContentID);
   $(".category-list").val(
     `${$($(this).parent())
       .parent()
@@ -488,13 +493,13 @@ $(".admin-edit-btn").click(function(e) {
       .text()
       .trim()}`
   );
-  $("#needToPreview").val(
-    `${$($(this).parent())
-      .parent()
-      .find(".admin-post-content")
-      .text()
-      .trim()}`
-  );
+
+  $('textarea').froalaEditor('html.set', `${$($(this).parent())
+        .parent()
+        .find(".admin-post-content")
+        .text()
+        .trim()}`);
+
 });
 
 // CLICK SUBMIT BTN TO EDIT POST (ADMIN)
@@ -503,7 +508,8 @@ $("#admin-post-submit").click(function(e) {
   const url = `${location.protocol}//${document.domain}:${
     location.port
   }/admin/editpost`;
-  const newId = $(".admin-post-title").data(`id`);
+  const newId = $("#admin-postContent").data(`id`);
+  console.log(newId)
   const newtitle = $("#admin-postContent").val();
   const newtags = $(".category-list").val();
   const newcontent = $("#needToPreview").val();
