@@ -217,7 +217,6 @@ export const editUserProfile = async params => {
   try {
     // Tim info theo username
     const hash = await bcrypt.hash(password, Configs.saltRounds);
-    
     const findUserInDB = await User.findOne({
       where: {
         username
@@ -227,8 +226,11 @@ export const editUserProfile = async params => {
       password,
       findUserInDB.password
     );
+    if(!findUserInDB){
+      return
+    }
     if (!compare) {
-      if (avatar) {
+      if (password && avatar) {
         const updateUserProfile = await User.update(
           {
             password: hash,
@@ -241,8 +243,7 @@ export const editUserProfile = async params => {
           }
         );
         return updateUserProfile;
-      } else {
-        // console.log("da vao else, khac pass cu, k co ava "+username);
+      } else if (password && !avatar) {
         const updateUserProfile = await User.update(
           {
             password: hash
@@ -255,23 +256,24 @@ export const editUserProfile = async params => {
         );
         return updateUserProfile;
       }
-    } else if (!password || password =="" && avatar) {
-      console.log('k co pass, co ava :', password);
-      //Neu k dien password thi chi update avatar thoi
-      const updateUserProfile = await User.update(
-        {
-          avatar
-        },
-        {
-          where: {
-            username
+      else if (!password && avatar) {
+        //Neu k dien password thi chi update avatar thoi
+        const updateUserProfile = await User.update(
+          {
+            avatar
+          },
+          {
+            where: {
+              username
+            }
           }
-        }
-      );
-      return updateUserProfile;
-    } else if (!password || password=="" && !avatar) {
-      return;
-    }
+        );
+        return updateUserProfile;
+      } else if (!password && !avatar) {
+        return;
+      }
+    } 
+    return;
   } catch (error) {
     throw error;
   }

@@ -382,7 +382,7 @@ $("#admin-logout-btn").click(function(e) {
 });
 
 // EDIT PROFILE (ADMIN)
-$("#admin-form-updateProfile").submit(function EditBtn(e) {
+$("#admin-form-updateProfile").submit(function(e) {
   // console.log("submit vao duoc roi neeeeeeeeee");
   e.preventDefault(); // loai bo trang thai mac dinh (submit k reload nua)
   const url = `${location.protocol}//${document.domain}:${
@@ -509,7 +509,6 @@ $("#admin-post-submit").click(function(e) {
     location.port
   }/admin/editpost`;
   const newId = $("#admin-postContent").data(`id`);
-  console.log(newId)
   const newtitle = $("#admin-postContent").val();
   const newtags = $(".category-list").val();
   const newcontent = $("#needToPreview").val();

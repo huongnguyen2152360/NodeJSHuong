@@ -97,7 +97,7 @@ router.get(
   }),
   (req, res) => {
     req.session.user = req.user;
-    res.redirect("/home");
+    res.redirect("/");
   }
 );
 
@@ -122,7 +122,7 @@ router.get(
   }),
   (req, res) => {
     req.session.user = req.user;
-    res.redirect("/home");
+    res.redirect("/");
   }
 );
 
@@ -140,7 +140,7 @@ router.get(
   (req, res) => {
     req.session.user = req.user;
     // Successful authentication, redirect home.
-    res.redirect("/home");
+    res.redirect("/");
   }
 );
 
