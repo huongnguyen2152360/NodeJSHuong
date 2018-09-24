@@ -746,9 +746,9 @@ $("#forgotpassword").submit(function(e) {
           hideMethod: "fadeOut"
         };
         toastr["success"](`${result.message}`, "Notification");
-        window.location.href = `${location.protocol}//${document.domain}:${
-            location.port
-          }`;
+        // window.location.href = `${location.protocol}//${document.domain}:${
+        //     location.port
+        //   }`;
       } else if (result.result == "failed") {
         // console.log(`khong create duoc`);
         toastr.options = {
@@ -814,11 +814,89 @@ $('.next-button.repeat-password').click(
   function(){
     $('.repeat-password-section').addClass("fold-up");
     $('.success').css("marginTop", 0);
+    const url = `${location.protocol}//${document.domain}:${
+    location.port
+  }/users/changepassword`;
+  const password = $("#changePassword").val(); 
+  const repassword = $("#changeRepassword").val(); 
+  const email = window.location.pathname.split("/")[3]
+  console.log("ajax 1")
+  if (isAjaxAvailable) {
+    // sử dụng phương pháp cắm cờ để check xem ajax có đang hoạt động không, false thì bắt đầu chạy ajax
+    isAjaxAvailable = !isAjaxAvailable; // nếu ajax mà đang chạy thì sẽ chuyển biến false thành true để ngăn không cho nó chạy lặp lại
+    console.log("vao ajax")
+  $.ajax({
+    url: url,
+    xhrFields: {
+      withCredentials: true
+    },
+    crossDomain: true,
+    type: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Access-Control-Allow-Origin": "*"
+    },
+    async: true,
+    data: {
+      password,
+      repassword,
+      email
+    },
+    // data: $(".form-horizontal").serialize(),
+    dataType: "json",
+    success: function(result) {
+      if (result.result == "success") {
+        toastr.options = {
+          closeButton: false,
+          debug: false,
+          newestOnTop: true,
+          progressBar: true,
+          positionClass: "toast-top-right",
+          preventDuplicates: false,
+          showDuration: 300,
+          hideDuration: 1000,
+          timeOut: 2000,
+          extendedTimeOut: 1000,
+          showEasing: "swing",
+          hideEasing: "linear",
+          showMethod: "fadeIn",
+          hideMethod: "fadeOut"
+        };
+        toastr["success"](`${result.message}`, "Notification");
+        window.location.href = `${location.protocol}//${document.domain}:${
+            location.port
+          }`;
+      } else if (result.result == "failed") {
+        toastr.options = {
+          closeButton: false,
+          debug: false,
+          newestOnTop: true,
+          progressBar: true,
+          positionClass: "toast-top-right",
+          preventDuplicates: false,
+          showDuration: 300,
+          hideDuration: 1000,
+          timeOut: 2000,
+          extendedTimeOut: 1000,
+          showEasing: "swing",
+          hideEasing: "linear",
+          showMethod: "fadeIn",
+          hideMethod: "fadeOut"
+        };
+        toastr["error"](`${result.message}`, "Notification");
+      }
+    }, complete: function(result) {
+          
+      isAjaxAvailable = !isAjaxAvailable;
+    }
+  })
+};
   }
 );
 
 // UPDATE CHANGED PASS (FORGOT PASS)
 $("#changepassword").submit(function(e) {
+  console.log('vao ajax')
   e.preventDefault(); // loai bo trang thai mac dinh (submit k reload nua)
   const url = `${location.protocol}//${document.domain}:${
     location.port
@@ -827,6 +905,7 @@ $("#changepassword").submit(function(e) {
   if (isAjaxAvailable) {
     // sử dụng phương pháp cắm cờ để check xem ajax có đang hoạt động không, false thì bắt đầu chạy ajax
     isAjaxAvailable = !isAjaxAvailable; // nếu ajax mà đang chạy thì sẽ chuyển biến false thành true để ngăn không cho nó chạy lặp lại
+    
   $.ajax({
     url: url,
     xhrFields: {
@@ -890,5 +969,6 @@ $("#changepassword").submit(function(e) {
           
       isAjaxAvailable = !isAjaxAvailable;
     }
-  })};
+  })
+};
 });

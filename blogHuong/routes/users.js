@@ -29,8 +29,6 @@ router.post("/sendresetpass", async (req, res) => {
         message: Configs.EMAIL_SEND_SUCCESS
       });
     } else {
-      console.log('email k co trong DB')
-      console.log(sendEmail)
       res.json({
         result: Configs.FAILED,
         message: Configs.EMAIL_SEND_FAILED
@@ -60,12 +58,12 @@ router.get("/checktimeout/:email", async (req, res) => {
 });
 
 //CHANGE PASSWORD (FORGOT PASS)
-router.post("/changepassword/:email", async (req, res) => {
+router.post("/changepassword", async (req, res) => {
   console.log('vao router changepassword')
-  const { email, password, repassword } = req.params;
+  const { email, password, repassword } = req.body;
   try {
     if (repassword === password) {
-      const passReset = await UserController.resetPass(req.params);
+      const passReset = await UserController.resetPass(req.body);
       if (passReset) {
         res.json({
           result: Configs.SUCCESS,

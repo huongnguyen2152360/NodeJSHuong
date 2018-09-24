@@ -288,7 +288,8 @@ export const emailResetPass = async params => {
         }
       }
     );
-    if (findEmail) {
+    console.log('findEmail :', findEmail);
+    if (findEmail[0]) {
       nodemailer(email);
       return true;
     } else {
@@ -324,9 +325,10 @@ export const resetPass = async params => {
   console.log('vao UserController changepassword')
   const { email, password } = params;
   try {
+    const hash = await bcrypt.hash(password, Configs.saltRounds);
     const updatePassReset = await User.update(
       {
-        password
+        password: hash
       },
       {
         where: {
