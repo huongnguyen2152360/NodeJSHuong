@@ -14,7 +14,7 @@ export const allPostsInDB = async params => {
       include: [
         {
           model: User,
-          attributes: ["username", "avatar"], // Lay avatar cua username tu model User
+          attributes: ["email", "avatar"], // Lay avatar cua username tu model User
           required: true
         }
       ]
@@ -29,13 +29,13 @@ export const allPostsInDB = async params => {
 export const allPostsByUsername = async (query, session) => {
   // console.log(session)
   const { offset } = query;
-  const { username } = session;
+  const { email } = session;
   try {
     const findPostByUsername = await Post.findAll({
       limit: 20,
       offset: offset ? offset * 20 : 0,
       where: {
-        author: username
+        author: email
       },
       order: [["id", "DESC"]]
     });
@@ -56,7 +56,7 @@ export const getPostByID = async params => {
       include: [
         {
           model: User,
-          attributes: ['username','avatar'], // Lay avatar cua username tu model User
+          attributes: ['email','avatar'], // Lay avatar cua username tu model User
           required: true
         }
       ]

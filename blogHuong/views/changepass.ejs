@@ -33,16 +33,21 @@
 <div class="back"></div>
 <div class="registration-form">
   <header>
-    <h1>Forgot password?</h1>
-    <p class="line2">Enter your email below</p>
+    <h1>Reset your password</h1>
+    <p class="line2">Enter your new password below</p>
   </header>
-  <form id="forgotpassword">
-    <div class="input-section email-section">
-      <input class="email email-needed" type="email" placeholder="ENTER YOUR E-MAIL HERE" autocomplete="off"/>
-      <div class="animated-button"><span class="icon-paper-plane"><i class="fas fa-envelope"></i></span><span class="next-button email"><i class="fas fa-arrow-up"></i></span></div>
+  <form id="changepassword">
+    <div class="input-section password-section">
+      <input class="password" id ="changePassword" type="password" placeholder="ENTER YOUR PASSWORD HERE" name="password"/>
+      <div class="animated-button"><span class="icon-lock"><i class="fas fa-lock"></i></span><span class="next-button password"><i class="fas fa-arrow-up"></i></span></div>
     </div>
+    <div class="input-section repeat-password-section folded">
+      <input class="repeat-password" type="password" placeholder="REPEAT YOUR PASSWORD HERE" name="repassword"/>
+      <div class="animated-button"><span class="icon-repeat-lock"><i class="fas fa-lock"></i></span><span class="next-button repeat-password"><i class="fas fa-paper-plane"></i></span></div>
+    </div>
+    
     <div class="success"> 
-      <p>Please check your account for password reset.</p>
+      <p>Password changed successfully!</p>
     </div>
   </form>
 </div>

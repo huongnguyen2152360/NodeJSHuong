@@ -8,6 +8,7 @@ import bcrypt from "bcrypt";
 const keys = require("./keys");
 import * as Configs from "../configs/config";
 import Init from "../Utils/Init";
+import nodemailer from "../configs/nodemailer";
 // Tim tat ca user
 export const listAllUserInDB = async params => {
   const allUsersInDB = await User.findAll({
@@ -53,10 +54,7 @@ export const userLogin = async params => {
     if (!email) {
       return;
     } else {
-      const compare = await bcrypt.compareSync(
-				password,
-				userInDB.password
-      );
+      const compare = await bcrypt.compareSync(password, userInDB.password);
       if (compare) {
         return userInDB;
       } else {
@@ -222,12 +220,9 @@ export const editUserProfile = async params => {
         email
       }
     });
-    const compare = await bcrypt.compareSync(
-      password,
-      findUserInDB.password
-    );
-    if(!findUserInDB){
-      return
+    const compare = await bcrypt.compareSync(password, findUserInDB.password);
+    if (!findUserInDB) {
+      return;
     }
     if (!compare) {
       if (password && avatar) {
@@ -255,8 +250,7 @@ export const editUserProfile = async params => {
           }
         );
         return updateUserProfile;
-      }
-      else if (!password && avatar) {
+      } else if (!password && avatar) {
         //Neu k dien password thi chi update avatar thoi
         const updateUserProfile = await User.update(
           {
@@ -272,8 +266,79 @@ export const editUserProfile = async params => {
       } else if (!password && !avatar) {
         return;
       }
-    } 
+    }
     return;
+  } catch (error) {
+    throw error;
+  }
+};
+
+//SEND EMAIL FORGOT PASSWORD
+export const emailResetPass = async params => {
+  const { email } = params;
+  const key = Date.now();
+  try {
+    const findEmail = await User.update(
+      {
+        key
+      },
+      {
+        where: {
+          email
+        }
+      }
+    );
+    if (findEmail) {
+      nodemailer(email);
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+// CHECK TIME OUT
+export const checkTimeOut = async params => {
+  const { email } = params;
+  try {
+    const findKey = await User.findOne({
+      where: {
+        email
+      }
+    });
+    const timeNow = Date.now();
+    if (timeNow - findKey.key < 300000) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+// UPDATE PASSWORD RESET
+export const resetPass = async params => {
+  console.log('vao UserController changepassword')
+  const { email, password } = params;
+  try {
+    const updatePassReset = await User.update(
+      {
+        password
+      },
+      {
+        where: {
+          email
+        }
+      }
+    );
+    if (updatePassReset) {
+      return true;
+    } else {
+      return false;
+    }
   } catch (error) {
     throw error;
   }

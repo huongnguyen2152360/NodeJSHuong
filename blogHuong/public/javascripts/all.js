@@ -667,4 +667,228 @@ $('.admin-delete-btn').click(function(e) {
 })
 
 
+// __________________________________________LOGIN_________________________________
+// FORGOT PASS WORD (LOGIN)
+$('.email').on("change keyup paste",
+  function(){
+    if($(this).val()){
+      $('.icon-paper-plane').addClass("next");
+    } else {
+      $('.icon-paper-plane').removeClass("next");
+    }
+  }
+);
 
+$('.next-button').hover(
+  function(){
+    $(this).css('cursor', 'pointer');
+  }
+);
+
+$('.next-button.email').click(
+  function(){
+    $('.email-section').addClass("fold-up");
+    $('.password-section').removeClass("folded");
+  }
+);
+$('.next-button.email').click(
+  function(){
+    $('.email-section').addClass("fold-up");
+    $('.success').css("marginTop", 0);
+    $('.registration-form h1').text(`Email sent!`);
+    $('.line2').text(``);
+  }
+);
+
+//EMAIL RESET PASSWORD (LOGIN)
+$("#forgotpassword").submit(function(e) {
+  e.preventDefault(); // loai bo trang thai mac dinh (submit k reload nua)
+  const url = `${location.protocol}//${document.domain}:${
+    location.port
+  }/users/sendresetpass`;
+  const email = $('.email-needed').val();
+  if (isAjaxAvailable) {
+    // sử dụng phương pháp cắm cờ để check xem ajax có đang hoạt động không, false thì bắt đầu chạy ajax
+    isAjaxAvailable = !isAjaxAvailable; // nếu ajax mà đang chạy thì sẽ chuyển biến false thành true để ngăn không cho nó chạy lặp lại
+  $.ajax({
+    url: url,
+    xhrFields: {
+      withCredentials: true
+    },
+    crossDomain: true,
+    type: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Access-Control-Allow-Origin": "*"
+    },
+    async: true,
+    data: {
+      email
+    },
+    // data: $(".form-horizontal").serialize(),
+    dataType: "json",
+    success: function(result) {
+      if (result.result == "success") {
+        toastr.options = {
+          closeButton: false,
+          debug: false,
+          newestOnTop: true,
+          progressBar: true,
+          positionClass: "toast-top-right",
+          preventDuplicates: false,
+          showDuration: 300,
+          hideDuration: 1000,
+          timeOut: 2000,
+          extendedTimeOut: 1000,
+          showEasing: "swing",
+          hideEasing: "linear",
+          showMethod: "fadeIn",
+          hideMethod: "fadeOut"
+        };
+        toastr["success"](`${result.message}`, "Notification");
+        window.location.href = `${location.protocol}//${document.domain}:${
+            location.port
+          }`;
+      } else if (result.result == "failed") {
+        // console.log(`khong create duoc`);
+        toastr.options = {
+          closeButton: false,
+          debug: false,
+          newestOnTop: true,
+          progressBar: true,
+          positionClass: "toast-top-right",
+          preventDuplicates: false,
+          showDuration: 300,
+          hideDuration: 1000,
+          timeOut: 2000,
+          extendedTimeOut: 1000,
+          showEasing: "swing",
+          hideEasing: "linear",
+          showMethod: "fadeIn",
+          hideMethod: "fadeOut"
+        };
+        toastr["error"](`${result.message}`, "Notification");
+      }
+    }, complete: function(result) {
+          
+      isAjaxAvailable = !isAjaxAvailable;
+    }
+  })};
+});
+
+// RESET (change) PASSWORD (LOGIN)
+$('.password').on("change keyup paste",
+  function(){
+    if($(this).val()){
+      $('.icon-lock').addClass("next");
+    } else {
+      $('.icon-lock').removeClass("next");
+    }
+  }
+);
+
+$('.next-button').hover(
+  function(){
+    $(this).css('cursor', 'pointer');
+  }
+);
+
+$('.next-button.password').click(
+  function(){
+    $('.password-section').addClass("fold-up");
+    $('.repeat-password-section').removeClass("folded");
+  }
+);
+
+$('.repeat-password').on("change keyup paste",
+  function(){
+    if($(this).val()){
+      $('.icon-repeat-lock').addClass("next");
+    } else {
+      $('.icon-repeat-lock').removeClass("next");
+    }
+  }
+);
+
+$('.next-button.repeat-password').click(
+  function(){
+    $('.repeat-password-section').addClass("fold-up");
+    $('.success').css("marginTop", 0);
+  }
+);
+
+// UPDATE CHANGED PASS (FORGOT PASS)
+$("#changepassword").submit(function(e) {
+  e.preventDefault(); // loai bo trang thai mac dinh (submit k reload nua)
+  const url = `${location.protocol}//${document.domain}:${
+    location.port
+  }/users/changepassword/:${email}`;
+  const password = $("#changePassword").val(); 
+  if (isAjaxAvailable) {
+    // sử dụng phương pháp cắm cờ để check xem ajax có đang hoạt động không, false thì bắt đầu chạy ajax
+    isAjaxAvailable = !isAjaxAvailable; // nếu ajax mà đang chạy thì sẽ chuyển biến false thành true để ngăn không cho nó chạy lặp lại
+  $.ajax({
+    url: url,
+    xhrFields: {
+      withCredentials: true
+    },
+    crossDomain: true,
+    type: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Access-Control-Allow-Origin": "*"
+    },
+    async: true,
+    data: {
+      password,
+      email
+    },
+    // data: $(".form-horizontal").serialize(),
+    dataType: "json",
+    success: function(result) {
+      if (result.result == "success") {
+        toastr.options = {
+          closeButton: false,
+          debug: false,
+          newestOnTop: true,
+          progressBar: true,
+          positionClass: "toast-top-right",
+          preventDuplicates: false,
+          showDuration: 300,
+          hideDuration: 1000,
+          timeOut: 2000,
+          extendedTimeOut: 1000,
+          showEasing: "swing",
+          hideEasing: "linear",
+          showMethod: "fadeIn",
+          hideMethod: "fadeOut"
+        };
+        toastr["success"](`${result.message}`, "Notification");
+        window.location.href = `${location.protocol}//${document.domain}:${
+            location.port
+          }`;
+      } else if (result.result == "failed") {
+        toastr.options = {
+          closeButton: false,
+          debug: false,
+          newestOnTop: true,
+          progressBar: true,
+          positionClass: "toast-top-right",
+          preventDuplicates: false,
+          showDuration: 300,
+          hideDuration: 1000,
+          timeOut: 2000,
+          extendedTimeOut: 1000,
+          showEasing: "swing",
+          hideEasing: "linear",
+          showMethod: "fadeIn",
+          hideMethod: "fadeOut"
+        };
+        toastr["error"](`${result.message}`, "Notification");
+      }
+    }, complete: function(result) {
+          
+      isAjaxAvailable = !isAjaxAvailable;
+    }
+  })};
+});

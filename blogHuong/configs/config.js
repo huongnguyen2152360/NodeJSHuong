@@ -31,3 +31,10 @@ export const POST_EDIT_SUCCESS = "Edit post successfully!";
 
 export const POST_DELETE_SUCCESS = "Delete post successfully!";
 
+export const EMAIL_SEND_SUCCESS = "Email sent successfully! Please check your email for password reset."
+export const EMAIL_SEND_FAILED = "Email not existed."
+
+export const USER_RESET_PASS_SUCCESS = "Password updated successfully!"
+export const USER_RESET_PASS_NOTENOUGH = "Please type your password!"
+export const USER_RESET_PASS_FAILED = "Password unmatched!"
+

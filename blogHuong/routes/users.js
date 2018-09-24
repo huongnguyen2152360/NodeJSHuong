@@ -13,13 +13,88 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/forgotpass", async(req,res) => {
+// GET FORGOT PASS
+router.get("/forgotpass", async (req, res) => {
   res.render("forgotpass");
-})
+});
+
+//SEND EMAIL (FORGOT PASS)
+router.post("/sendresetpass", async (req, res) => {
+  const { email } = req.body;
+  try {
+    const sendEmail = await UserController.emailResetPass(req.body);
+    if (sendEmail) {
+      res.json({
+        result: Configs.SUCCESS,
+        message: Configs.EMAIL_SEND_SUCCESS
+      });
+    } else {
+      console.log('email k co trong DB')
+      console.log(sendEmail)
+      res.json({
+        result: Configs.FAILED,
+        message: Configs.EMAIL_SEND_FAILED
+      });
+    }
+  } catch (error) {
+    res.json({
+      result: Configs.FAILED,
+      message: `Failed. Error: ${error}.`
+    });
+  }
+});
+
+// CHECK TIME OUT
+router.get("/checktimeout/:email", async (req, res) => {
+  const { email } = req.params;
+  try {
+    const checkTime = await UserController.checkTimeOut(req.params);
+    if (checkTime) {
+      res.render("changepass");
+    } else {
+      res.render("404");
+    }
+  } catch (error) {
+    throw error;
+  }
+});
+
+//CHANGE PASSWORD (FORGOT PASS)
+router.post("/changepassword/:email", async (req, res) => {
+  console.log('vao router changepassword')
+  const { email, password, repassword } = req.params;
+  try {
+    if (repassword === password) {
+      const passReset = await UserController.resetPass(req.params);
+      if (passReset) {
+        res.json({
+          result: Configs.SUCCESS,
+          message: Configs.USER_RESET_PASS_SUCCESS
+        });
+      } else {
+        res.json({
+          result: Configs.FAILED,
+          message: Configs.USER_RESET_PASS_NOTENOUGH
+        });
+      }
+    } else {
+      res.json({
+        result: Configs.FAILED,
+        message: Configs.USER_RESET_PASS_FAILED
+      });
+    }
+  } catch (error) {
+    res.json({
+      result: Configs.FAILED,
+      message: `Failed. Error: ${error}.`
+    });
+  }
+});
+
 // REGISTER
 router.post("/register", async (req, res) => {
   const { email, password, repassword, avatar } = req.body;
-  
+
   try {
     if (email && password === repassword) {
       const registerUser = await UserController.createNewUser(req.body); //createNewUser return newUser
@@ -85,7 +160,6 @@ router.post("/logout", async (req, res) => {
   });
 });
 
-
 // ___________________________________________________________________
 //                    CONNECT WITH FACEBOOK
 // for fb to send consent screen to user
@@ -103,7 +177,6 @@ router.get(
     res.redirect("/");
   }
 );
-
 
 //                    CONNECT WITH GOOGLE
 //for gg to send consent screen to user

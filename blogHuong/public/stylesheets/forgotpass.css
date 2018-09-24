@@ -167,8 +167,9 @@ body {
   }
   .success p {
     color: white;
-    font-weight: 900;
-    letter-spacing: 2px;
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: 1px;
     font-size: 18px;
     width: 100%;
     text-align: center;

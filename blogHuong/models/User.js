@@ -1,6 +1,6 @@
 import Sequelize from "sequelize";
 import { sequelize } from "../databases/database";
-import Post from '../models/Post';
+import Post from "../models/Post";
 
 const User = sequelize.define(
   "user",
@@ -17,6 +17,9 @@ const User = sequelize.define(
     },
     avatar: {
       type: Sequelize.STRING
+    },
+    key:{
+      type:Sequelize.INTEGER
     }
   },
   {
@@ -24,6 +27,6 @@ const User = sequelize.define(
   }
 );
 
-User.hasMany(Post, {foreignKey: 'author', sourceKey: 'email'});
-Post.belongsTo(User, {foreignKey: 'author', targetKey: 'email'});
+User.hasMany(Post, { foreignKey: "author", sourceKey: "email" });
+Post.belongsTo(User, { foreignKey: "author", targetKey: "email" });
 export default User;
