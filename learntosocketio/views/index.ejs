@@ -4,14 +4,35 @@
 <head>
   <title>My first attemp to Socket.io</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
+  <!-- BS CORE CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+  <!-- MD BOOTSTRAP PRO -->
+  <link rel="stylesheet" href="https://namboss.blob.core.windows.net/huong/mdb.css">
 </head>
 
 <body>
   <h1>Learn to socket.io</h1>
   <p>Some few text to keep you hangin ...</p>
+  <hr>
+  <button class="btn peach-gradient btn-rounded" id="userA">Client send button</button>
+  <h3 id="server-return-msg"></h3>
 
+
+  <!-- MD BOOTSTRAP JS -->
+  <script src="https://namboss.blob.core.windows.net/huong/mdb.min.js"></script>
+  <!-- BS CORE JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+  <!-- JQUERY -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- CONNECT SOCKET -->
   <script src="http://localhost:5000/socket.io/socket.io.js"></script>
+  <!-- MY JS -->
   <script src="/javascripts/all.js"></script>
 
 </body>
