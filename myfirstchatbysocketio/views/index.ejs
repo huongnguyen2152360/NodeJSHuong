@@ -15,6 +15,7 @@
 </head>
 
 <body>
+  <div class="index">
   <!-- Background -->
   <div id='stars'></div>
   <div id='stars2'></div>
@@ -35,12 +36,43 @@
         <div class="all-noti"></div>
         <button type="submit" class="btn btn-outline-primary btn-rounded waves-effect" id="register-chat1"><a href="/users/chat1">Register
             (Chat1)</a></button>
-        <button type="button" class="btn btn-outline-primary btn-rounded waves-effect" id="register-chat2"><a href="#">Register
-            (Chat2)</a></button>
+        <button type="button" class="btn btn-outline-primary btn-rounded waves-effect" id="register-chat2">Register
+            (Chat2)</button>
       </div>
     </div>
-
   </div>
+</div>
+<!-- End of index -->
+<div class="container" id="chatform">
+    <div class="row" id="leftbox">
+        <div class="col-4">
+            <div id="leftbox-title">
+                <h5>Users online</h5>
+            </div>
+            <div id="leftbox-content">
+            </div>
+        </div>
+
+
+        <div class="col-8" id="rightbox">
+            <div id="sayHi">
+                Hello <span id="currentUser">User A</span>
+                <button type="button" class="btn btn-outline-info btn-rounded waves-effect" id="btnLogout">Logout</button>
+            </div>
+            <div id="listMessages">
+            </div>
+            <div class="row">
+                <div class="col-9">
+                    <input type="text" id="txtMessage" />
+                </div>
+                <div class="col-3">
+                    <button class="btn aqua-gradient btn-rounded" id="btnSendMessage" type="submit">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
   <!-- Basic jquery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

@@ -1,18 +1,33 @@
 const app = require("../app");
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
-const manageUsers = ["aaa"];
+const manageUsers = [];
 
 io.on("connection", function(socket) {
   console.log(socket.id + " is connected.");
   socket.on("client--regisUsername", function(data) {
-   if (manageUsers.indexOf(data) >= 0) {
-    socket.emit("server--regisFail")
-   } else {
-     manageUsers.push(data);
-     console.log(manageUsers);
-    socket.emit("server--regisSuccess", data)
-   }
+    if (manageUsers.indexOf(data) >= 0) {
+      socket.emit("server--regisFail");
+    } else {
+      manageUsers.push(data);
+      socket.Username = data;
+      socket.emit("server--regisSuccess", data);
+      // let findData = manageUsers.indexOf(data);
+      // manageUsers.splice(findData,1);
+      // console.log(manageUsers);
+      io.sockets.emit("server--usersOnline", manageUsers);
+    }
+  });
+
+  // Client logout
+  socket.on("client--logout", () => {
+    manageUsers.splice(manageUsers.indexOf(socket.Username), 1);
+    socket.broadcast.emit("server--usersOnline", manageUsers);
+  });
+
+  //Send msg
+  socket.on("client--msg", function(msg) {
+    io.sockets.emit("server--msg", {user: socket.Username, content: msg} );
   });
 });
 
