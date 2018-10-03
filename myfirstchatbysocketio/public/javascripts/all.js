@@ -1,4 +1,4 @@
-var socket = io.connect("http://localhost:8000");
+var socket = io.connect("https://huong-testchat-socketio.herokuapp.com/");
 $(".index").show();
 $("#chatform").hide();
 // Client đăng ký username (Index)
