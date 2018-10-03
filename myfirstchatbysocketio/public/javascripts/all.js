@@ -63,6 +63,39 @@ $("#btnSendMessage").click(function() {
 //Client receive msg
 socket.on("server--msg", function(msg) {
   $("#listMessages").append(
-    (`<div class='msg--content'>${msg.user}: ${msg.content}</div>`)
+    `<div class='msg--content'>${msg.user}: ${msg.content}</div>`
   );
 });
+
+$(".index").show();
+$(".chatroom").hide();
+
+//Client create chat room
+$("#register-chat1").click(function() {
+  socket.emit("client--createroom", $("#txtRoom").val());
+  $(".index").hide(3000);
+  $(".chatroom").show(2000);
+});
+
+// Client lay all rooms ve
+socket.on("server--allRooms", function(data) {
+  $("#listallRooms").html("");
+  data.map(function(room) {
+    $("#listallRooms").append(`<p class="room">${room}</p>`);
+  });
+});
+
+// Client lay current room ve
+socket.on("server--currentRoom", function(data) {
+  $("#currentRoom").html(data);
+});
+
+// Client chat trong room
+$("#chatMsg-send").click(function() {
+  socket.emit("client--chatMsg", $("#chatMsg").val());
+});
+
+// Client lay msg hien thi ve
+socket.on("server--chatMsg", function(data) {
+  $(".chatarea").append(`<p>${data}</p>`);
+})

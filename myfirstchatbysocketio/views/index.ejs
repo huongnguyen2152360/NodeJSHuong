@@ -16,63 +16,92 @@
 
 <body>
   <div class="index">
-  <!-- Background -->
-  <div id='stars'></div>
-  <div id='stars2'></div>
-  <div id='stars3'></div>
-  <div id='title'>
-    <span>
-      Hey you~
-    </span>
-    <br>
-    <span>
-      Welcome to Huong's first chat app by Socket.io
-    </span>
-    <div id="loginform">
-      <h4>Type your username:</h4>
-      <div class="md-form">
-        <input type="text" id="txtUsername" class="form-control">
-        <label for="txtUsername">Your username</label>
-        <div class="all-noti"></div>
-        <button type="submit" class="btn btn-outline-primary btn-rounded waves-effect" id="register-chat1"><a href="/users/chat1">Register
-            (Chat1)</a></button>
-        <button type="button" class="btn btn-outline-primary btn-rounded waves-effect" id="register-chat2">Register
-            (Chat2)</button>
+    <!-- Background -->
+    <div id='stars'></div>
+    <div id='stars2'></div>
+    <div id='stars3'></div>
+    <div id='title'>
+      <span>
+        Hey you~
+      </span>
+      <br>
+      <span>
+        Welcome to Huong's first chat app by Socket.io
+      </span>
+      <div id="loginform">
+        <h4>Type your username:</h4>
+        <div class="md-form">
+          <div class="row">
+            <div class="col-6">
+              <input type="text" id="txtUsername" class="form-control">
+              <label for="txtUsername" id="line01">Your username</label>
+            </div>
+            <div class="col-6">
+              <input type="text" id="txtRoom" class="form-control">
+              <label for="txtRoom" id="line02">Your room name</label>
+            </div>
+          </div>
+
+          <div class="all-noti"></div>
+          <button type="submit" class="btn btn-outline-primary btn-rounded waves-effect" id="register-chat1">Create a
+            chat room</button>
+          <button type="button" class="btn btn-outline-primary btn-rounded waves-effect" id="register-chat2">Join an
+            existing room</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<!-- End of index -->
-<div class="container" id="chatform">
+  <!-- End of index -->
+  <div class="container" id="chatform">
     <div class="row" id="leftbox">
-        <div class="col-4">
-            <div id="leftbox-title">
-                <h5>Users online</h5>
-            </div>
-            <div id="leftbox-content">
-            </div>
+      <div class="col-4">
+        <div id="leftbox-title">
+          <h5>Users online</h5>
         </div>
+        <div id="leftbox-content">
+        </div>
+      </div>
 
 
-        <div class="col-8" id="rightbox">
-            <div id="sayHi">
-                Hello <span id="currentUser">User A</span>
-                <button type="button" class="btn btn-outline-info btn-rounded waves-effect" id="btnLogout">Logout</button>
-            </div>
-            <div id="listMessages">
-            </div>
-            <div class="row">
-                <div class="col-9">
-                    <input type="text" id="txtMessage" />
-                </div>
-                <div class="col-3">
-                    <button class="btn aqua-gradient btn-rounded" id="btnSendMessage" type="submit">Send</button>
-                </div>
-            </div>
+      <div class="col-8" id="rightbox">
+        <div id="sayHi">
+          Hello <span id="currentUser">User A</span>
+          <button type="button" class="btn btn-outline-info btn-rounded waves-effect" id="btnLogout">Logout</button>
         </div>
+        <div id="listMessages">
+        </div>
+        <div class="row">
+          <div class="col-9">
+            <input type="text" id="txtMessage" />
+          </div>
+          <div class="col-3">
+            <button class="btn aqua-gradient btn-rounded" id="btnSendMessage" type="submit">Send</button>
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+  </div>
 
+  <!-- ROOM CHAT -->
+  <div class="chatroom">
+    <div class="row">
+      <div class="left col-4">
+        <h3>All rooms</h3>
+        <div id="listallRooms">
+
+        </div>
+      </div>
+      <div class="right col-8">
+        <p id="currentRoom" class="text-right"></p>
+        <div class="chatarea">
+          
+        </div>
+        <input type="text" id="chatMsg">
+          <button type="button" class="btn btn-outline-primary btn-rounded waves-effect" id="chatMsg-send">Send</button>
+      </div>
+    </div>
+
+  </div>
 
   <!-- Basic jquery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

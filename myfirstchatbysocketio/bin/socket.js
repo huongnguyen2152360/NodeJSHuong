@@ -29,6 +29,27 @@ io.on("connection", function(socket) {
   socket.on("client--msg", function(msg) {
     io.sockets.emit("server--msg", {user: socket.Username, content: msg} );
   });
+
+  //Client create chat room
+  socket.on("client--createroom", function(data) {
+    // console.log(socket.adapter.rooms);
+    socket.join(data);
+    socket.thisroom = data;
+    let listRooms = [];
+    for (let room in socket.adapter.rooms) {
+      listRooms.push(room);
+    }
+    // Display all rooms to all server
+    io.sockets.emit("server--allRooms",listRooms)
+    
+    // Display current room to current user(s)
+    socket.emit("server--currentRoom", data);
+  });
+
+  // Client chat trong room
+  socket.on("client--chatMsg", function(msg) {
+    io.sockets.in(socket.thisroom).emit("server--chatMsg", msg)
+  })
 });
 
 http.listen(8000, function() {
