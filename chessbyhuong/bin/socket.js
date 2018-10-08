@@ -1,7 +1,7 @@
 const app = require("../app");
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
-const allUsernames = ["aaa"];
+const allUsernames = [];
 
 io.on("connection", function(socket) {
   console.log(socket.id + " is connected.");
@@ -12,9 +12,16 @@ io.on("connection", function(socket) {
       socket.emit("server--regisFail");
     } else {
       allUsernames.push(username);
+      socket.username = username;
       socket.emit("server--regisSuccess", username);
       io.sockets.emit("server--usersOnline", allUsernames);
     }
+  });
+
+  //Client logout
+  socket.on("client--signout", function() {
+    allUsernames.splice(allUsernames.indexOf(socket.username), 1);
+    socket.broadcast.emit("server--usersOnline", allUsernames);
   });
 });
 

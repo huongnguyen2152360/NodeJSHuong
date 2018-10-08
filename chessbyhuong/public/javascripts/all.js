@@ -24,5 +24,24 @@ socket.on("server--regisSuccess", function(username) {
 
 // Hiện users online
 socket.on("server--usersOnline", function(usernames) {
-    
+  $(".challengers").html("");
+  usernames.forEach(function(e) {
+    if (e != $(".chat--username").text()) {
+      $(".challengers").append(`<div class="row needpadding1">
+      <div class="col-9 chat--list">
+        <p id="chat--list-user">${e}</p>
+      </div>
+      <div class="col-3">
+          <img class="icon-challenge" data-toggle="tooltip" data-placement="right" title="Challenge this player" src="/images/challenge.png" alt="Challenge">
+      </div>
+    </div>`);
+    }
+  });
+});
+
+// User logout
+$(".sign-out-btn").click(function() {
+  socket.emit("client--signout");
+  $(".container").show(3000);
+  $(".game-room").hide(3000);
 })

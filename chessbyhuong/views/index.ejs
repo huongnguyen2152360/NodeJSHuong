@@ -12,12 +12,13 @@
   <link href="https://namboss.blob.core.windows.net/huong/mdb.css" rel="stylesheet">
 
   <!-- Font awesome -->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+    crossorigin="anonymous">
 
-<!-- Google Fonts -->
-<link href='https://fonts.googleapis.com/css?family=Assistant' rel='stylesheet'>
+  <!-- Google Fonts -->
+  <link href='https://fonts.googleapis.com/css?family=Assistant' rel='stylesheet'>
 
-<!-- My CSS -->
+  <!-- My CSS -->
   <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 
@@ -41,9 +42,9 @@
     </div>
   </div>
   <div class="game-room row">
-    <div class="chat-area col-4">
+    <div class="chat-area col-3">
       <div class="chat-header">
-        <h5>Online members</h5>
+        <h5>Online players</h5>
       </div>
       <div class="chat--onlineMembers">
         <div class="row needpadding">
@@ -56,22 +57,29 @@
           </div>
           <div class="col-3">
             <p>time</p>
-            <i class="fas fa-sign-out-alt"></i>
+            <i class="fas fa-sign-out-alt sign-out-btn"></i>
           </div>
+        </div>
+        <div class="chat--list-title">
+          <h6>Choose your challenger:</h6>
+        </div>
+        <div class="challengers">
         </div>
       </div>
       <!-- End of chat--onlineMembers -->
       <div class="blankdiv"></div>
       <div class="chat--chatbox">
-<div class="chat--msg">
-
-</div>
-<div class="chat--inputmsg">
-    <input class="form-control form-control-lg msg" type="text" placeholder="Large input">
-</div>
+        <div class="chat--msg">
+          <div class="chat--msg-line">
+            <p class="chat--msg-user">Huong: <span class="chat--msg-show">Let me blah lbaskfjdksajhf</span> </p>
+          </div>
+        </div>
+        <div class="chat--inputmsg">
+          <input class="form-control form-control-lg msg" type="text" placeholder="Large input">
+        </div>
       </div>
     </div>
-    <div class="game-area col-8">
+    <div class="game-area col-9">
 
     </div>
   </div>
@@ -87,8 +95,8 @@
     crossorigin="anonymous"></script>
   <!-- MD BOOTSTRAP JS -->
   <script type="text/javascript" src="https://namboss.blob.core.windows.net/huong/mdb.min.js"></script>
-<!-- Socketio -->
-<script src="http://localhost:5000/socket.io/socket.io.js"></script>
+  <!-- Socketio -->
+  <script src="http://localhost:5000/socket.io/socket.io.js"></script>
   <!-- My JS -->
   <script src="/javascripts/all.js"></script>
 

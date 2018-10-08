@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/socket --exec babel-node"
+    "start": "node ./bin/socket.js"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",

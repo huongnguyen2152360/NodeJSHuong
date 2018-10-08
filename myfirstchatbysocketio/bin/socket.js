@@ -52,6 +52,6 @@ io.on("connection", function(socket) {
   })
 });
 
-http.listen(8000, function() {
-  console.log("I am listening on *:8000");
+http.listen(process.env.PORT, function() {
+  console.log("I am listening on heroku port");
 });
