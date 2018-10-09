@@ -23,6 +23,11 @@ io.on("connection", function(socket) {
     allUsernames.splice(allUsernames.indexOf(socket.username), 1);
     socket.broadcast.emit("server--usersOnline", allUsernames);
   });
+
+  // User send msg
+  socket.on("client--sendmsg", function(msg) {
+    io.sockets.emit("server--sendmsg", { user: socket.username, content: msg });
+  });
 });
 
 http.listen(5000, function() {

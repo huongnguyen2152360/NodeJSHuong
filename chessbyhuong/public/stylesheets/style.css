@@ -119,6 +119,7 @@ body {
 
 .chat--msg {
   height: 350px;
+  overflow: scroll;
 }
 .msg {
   border-top: 1px solid #bdbdbd !important;
@@ -130,7 +131,7 @@ body {
 }
 
 .icon-challenge {
-  width: 50%;
+  width: 25px;
   cursor: pointer;
 }
 .icon-challenge:hover {
@@ -162,8 +163,37 @@ body {
 }
 .chat--msg-user {
   font-weight: bold;
+  margin-bottom: 0.5rem !important;
 }
 .chat--msg-show {
   font-weight: normal;
   padding-left: 5px;
+}
+
+/* CHESS BOARD */
+.square {
+  width: 12.5%;
+  height:90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chess--board {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.black--square {
+  background-image: url("../images/black_square.jpg");
+}
+.white--square {
+  background-image: url("../images/white_square.jpg");
+}
+.chess--piece {
+  cursor: pointer;
+  max-width: 70%;
+}
+.chess--piece img {
+  cursor: pointer;
+  width: 100%;
 }

@@ -17,8 +17,8 @@ socket.on("server--regisFail", function() {
 });
 // Đăng ký success
 socket.on("server--regisSuccess", function(username) {
-  $(".container").hide(3000);
-  $(".game-room").show(3000);
+  $(".container").hide(1000);
+  $(".game-room").show(1000);
   $(".chat--username").html(username);
 });
 
@@ -42,6 +42,22 @@ socket.on("server--usersOnline", function(usernames) {
 // User logout
 $(".sign-out-btn").click(function() {
   socket.emit("client--signout");
-  $(".container").show(3000);
-  $(".game-room").hide(3000);
-})
+  $(".container").show(1000);
+  $(".game-room").hide(1000);
+});
+
+// User send msg
+$("#chat--input").keypress(function(e) {
+  let key = e.which;
+  if (key == 13) {
+    socket.emit("client--sendmsg", $("#chat--input").val());
+  }
+});
+
+// User receive msg
+socket.on("server--sendmsg", function(msg) {
+  $(".chat--msg-line").append(
+    `<p class="chat--msg-user">${msg.user}: <span class="chat--msg-show">${msg.content}</span> </p>`
+  );
+  $("#chat--input").val("");
+});
