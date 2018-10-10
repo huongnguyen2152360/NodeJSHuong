@@ -61,3 +61,6 @@ socket.on("server--sendmsg", function(msg) {
   );
   $("#chat--input").val("");
 });
+
+//Draggable
+$( ".draggable" ).draggable();

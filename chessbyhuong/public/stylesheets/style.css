@@ -61,6 +61,7 @@ body {
 .game-room {
   padding: 1rem 15px;
   font-family: "Assistant";
+  margin: 0 !important;
 }
 
 .chat--onlineMembers {
@@ -182,6 +183,7 @@ body {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  padding-top: 2rem;
 }
 .black--square {
   background-image: url("../images/black_square.jpg");
