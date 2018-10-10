@@ -63,4 +63,5 @@ socket.on("server--sendmsg", function(msg) {
 });
 
 //Draggable
-$( ".draggable" ).draggable();
+$( ".chess--piece" ).draggable();
+$(".square").droppable();
