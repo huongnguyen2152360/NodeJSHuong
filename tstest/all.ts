@@ -43,4 +43,44 @@ epkieu = "Day la 1 vd ve ep kieu!";
 // console.log((<string>epkieu).length);
 // console.log((epkieu as string).length);
 
+//function
+function tinhtongg(): number {
+    return 100+200;
+}
+// console.log(tinhtongg());
 
+function doituong(): any {
+    return {
+        ten: "nhanvat",
+        tuoi: "30",
+        gioitinh: "nu",
+        kynang: {
+            kn1: "khong biet",
+            kn2: "tanghinh"
+        }
+    }
+}
+// console.log(doituong().kynang);
+
+function tinhtbc(x:number, y:number):void {
+    let tbc = (x+y)/2;
+    console.log(`trung binh cong tai x = ${x} va y = ${y} la ${tbc}.`);
+}
+// tinhtbc(10,12);
+
+// khai bao anonymous function
+var z = function gioithieu(x:number, y:string) {
+    return `Ban la ${y}, ${x} tuoi phai khong?`
+}
+// console.log(z(18,"Teo"));
+
+var g: (x:number, y:string) => string = function(x,y) {
+    return `Ban la ${y}, ${x} tuoi phai khong?`
+}
+// console.log(g(21,"Ti"));
+
+// function k can function
+var h = (x:number) : number => {
+    return x+10;
+}
+// console.log(h(9));

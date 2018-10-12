@@ -41,3 +41,39 @@ var epkieu;
 epkieu = "Day la 1 vd ve ep kieu!";
 // console.log((<string>epkieu).length);
 // console.log((epkieu as string).length);
+//function
+function tinhtongg() {
+    return 100 + 200;
+}
+// console.log(tinhtongg());
+function doituong() {
+    return {
+        ten: "nhanvat",
+        tuoi: "30",
+        gioitinh: "nu",
+        kynang: {
+            kn1: "khong biet",
+            kn2: "tanghinh"
+        }
+    };
+}
+// console.log(doituong().kynang);
+function tinhtbc(x, y) {
+    var tbc = (x + y) / 2;
+    console.log("trung binh cong tai x = " + x + " va y = " + y + " la " + tbc + ".");
+}
+// tinhtbc(10,12);
+// khai bao anonymous function
+var z = function gioithieu(x, y) {
+    return "Ban la " + y + ", " + x + " tuoi phai khong?";
+};
+// console.log(z(18,"Teo"));
+var g = function (x, y) {
+    return "Ban la " + y + ", " + x + " tuoi phai khong?";
+};
+// console.log(g(21,"Ti"));
+// function k can function
+var h = function (x) {
+    return x + 10;
+};
+// console.log(h(9));
