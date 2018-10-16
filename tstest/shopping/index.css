@@ -27,7 +27,7 @@ a {
     margin-bottom: 0 !important;
 }
 .giohang-title {
-    padding: 0 15px;
+    padding: 2rem 15px 0 15px;
 }
 .traii {
     padding-top: 1rem;
@@ -45,6 +45,7 @@ a {
 }
 .anh-sanpham img {
     width: 100%;
+    cursor: pointer;
 }
 .xoa, .dedanh {
     display: inline-block;
@@ -59,6 +60,12 @@ a {
 }
 .mota-title {
     font-weight: bold;
+}
+.mota-title a {
+    color: unset;
+}
+.mota-title a:hover {
+    color:#014c8c;
 }
 .gia1, .gia2, .gia3 {
     margin-bottom: 0 !important;
@@ -83,4 +90,78 @@ a {
 .input-group {
     display: flex;
 }
+.dongthu2 {
+    padding: 2rem 0;
+}
+.sanphamkhac-title {
+    padding: 2rem 0;
+}
+.card-price {
+    display: flex;
+}
+.card-img {
+    border-radius: calc(.25rem - 1px);
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+.card-img img {
+    width: 50%;
+}
+.card-title {
+    padding-top: 1rem;
+}
+.card-title a {
+    font-size: 0.9rem;
+    color: unset;
+    padding-top: 0.5rem;
+}
+.card-price p {
+    font-size: 0.9rem;
+}
+.card-price p:first-child {
+    padding-right: 0.2rem;
+}
+.card-price p:nth-child(2) {
+    font-size: 0.8rem;
+    color: gray;
+    text-decoration: line-through;
+    padding-right: 0.2rem;
+}
+.card-price p:last-child {
+    font-size: 0.8rem;
+    color: #ed0707;
+}
+.card {
+    border: none !important;
+    cursor: pointer;
+}
+.card:hover {
+    -webkit-box-shadow: 0 0 20px rgba(0,0,0,.1);
+    box-shadow: 0 0 20px rgba(0,0,0,.1);
+}
+.card-buy {
+    text-align: center;
+    padding-top: 1rem;
+}
+.btn.btn-primary.muangay {
+    font-size: 0.9rem;
+    background-color: transparent !important;
+    color: #0275d8;
+}
+.btn.btn-primary.muangay:hover {
+    color: #ffff !important;
+    background-color: #0275d8 !important;
+}
+.sanphamkhac .card {
+    height: 360px;
+}
+.soluong-sanpham {
+    width: 40px;
+    padding: 0 !important;
+    border-radius: 5px;
+    margin: 0 1px !important;
+    text-align: center;
+}
+
 
