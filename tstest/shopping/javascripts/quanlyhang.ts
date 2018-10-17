@@ -1,6 +1,6 @@
 import {SanPham} from "./sanpham";
 
-class QuanlyHang {
+export class QuanlyHang {
     private hang = SanPham[] = [];
 
     constructor() {}
