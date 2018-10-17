@@ -31,6 +31,7 @@ export class SanPham {
         this._gia = v;
     }
 
+
     //mota
     public get mota() :string {
         return this._mota;

@@ -1,2 +1,3 @@
-"use strict";
-exports.__esModule = true;
+import { QuanlyHang } from './quanlyhang';
+var tatcahang = new QuanlyHang();
+console.log("hello");

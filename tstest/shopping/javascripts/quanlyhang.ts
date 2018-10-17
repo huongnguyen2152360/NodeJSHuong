@@ -1,9 +1,13 @@
 import {SanPham} from "./sanpham";
 
 export class QuanlyHang {
-    private hang = SanPham[] = [];
+    private hang: SanPham[] = []; //đùng để hứng dữ liệu từ API
 
-    constructor() {}
+    constructor() {
+        // vì k có PHP nên tạo chay
+        var sp1 = new SanPham(1,"Ốp IPhone",40000,"Ốp cho IPhone",true,"https://pipe.tikicdn.com/cache/200x200/ts/product/1a/f0/a2/0978d091d83849160e6d31945ce9ae08.jpg");
+        this.addSanPham(sp1);
+    }
 
     getCacSanPham() :SanPham[] {
         return [];
@@ -14,7 +18,11 @@ export class QuanlyHang {
         return motsanpham;
     }
 
-    addSanPham() :void {}
+    addSanPham() :void {
+        // dùng để đẩy dữ liệu hứng từ API vào mảng hang = SanPham[]
+        this.hang.push(sp);
+        console.log(this.hang);
+    }
 
     showSanPham() :string {
         return '';
