@@ -126,6 +126,10 @@ body {
 .msg {
   border-top: 1px solid #bdbdbd !important;
   border-bottom: none !important;
+  font-size: 1rem;
+}
+.chat--msg-show {
+  color: #17a2b8;
 }
 .msg:focus {
   border-bottom: none !important;

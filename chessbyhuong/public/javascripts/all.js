@@ -7,7 +7,6 @@ $("#register-input").keypress(function(e) {
   if (key == 13) {
     // the enter key code
     $("#register-btn").click();
-    console.log($("#register-input").val());
     socket.emit("client--regisUsername", $("#register-input").val());
   }
 });
@@ -15,14 +14,12 @@ $("#register-input").keypress(function(e) {
 // Nhận kết quả đăng ký username
 // Đăng ký failed
 socket.on("server--regisFail", function() {
-  $(".regis-notice").html(`<h5>Username existed.</h5>`);
+  $(".regis-notice").html(`<h5>User existed or Please enter your username to start.</h5>`);
 });
 // Đăng ký success
 socket.on("server--regisSuccess", function(username) {
-  // $(".container").hide(1000);
-  console.log('server--regisSuccess');
-  $( ".container" ).hide( "drop", { direction: "down" }, "slow") ;
-  $(".game-room").show();
+  $( ".container" ).hide(1000) ;
+  $(".game-room").show(1000);
   $(".chat--username").html(username);
 });
 
@@ -61,7 +58,7 @@ $("#chat--input").keypress(function(e) {
 // User receive msg
 socket.on("server--sendmsg", function(msg) {
   $(".chat--msg-line").append(
-    `<p class="chat--msg-user">${msg.user}: <span class="chat--msg-show">${msg.content}</span> </p>`
+    `<p class="chat--msg-user">${msg.user}: <span class="chat--msg-show">${msg.content}</span></p> `
   );
   $("#chat--input").val("");
 });
