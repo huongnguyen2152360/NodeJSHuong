@@ -4,13 +4,16 @@ const io = require("socket.io")(http);
 const allUsernames = [];
 
 io.on("connection", function(socket) {
-  console.log(socket.id + " is connected.");
+  console.log(socket.id + " is connecteddddddd.");
   // Nhận đăng ký username
   socket.on("client--regisUsername", function(username) {
+    console.log('socket: client--regisUsername');
     // Đăng ký fail
     if (allUsernames.indexOf(username) >= 0) {
       socket.emit("server--regisFail");
+      console.log('socket: server--regisFail');
     } else {
+      console.log('socket: server-regis success');
       allUsernames.push(username);
       socket.username = username;
       socket.emit("server--regisSuccess", username);

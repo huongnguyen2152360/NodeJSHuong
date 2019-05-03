@@ -27,7 +27,7 @@ body {
 
 #register-input {
   font-size: 1.5rem;
-  color: white;
+  color: black;
 }
 
 .start-game-btn {
@@ -40,8 +40,9 @@ body {
 }
 
 .pressenter {
-  padding-right: 4rem;
+  padding-top: 1rem;
   font-size: 1.2rem;
+  color: white;
 }
 
 .regis-notice {

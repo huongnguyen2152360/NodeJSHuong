@@ -1,11 +1,13 @@
-var socket = io.connect("http://localhost:5000");
+var socket = io.connect("http://localhost:5000/");
 $(".game-room").hide();
+
 // Client đăng ký username
 $("#register-input").keypress(function(e) {
   let key = e.which;
   if (key == 13) {
     // the enter key code
     $("#register-btn").click();
+    console.log($("#register-input").val());
     socket.emit("client--regisUsername", $("#register-input").val());
   }
 });
@@ -17,8 +19,10 @@ socket.on("server--regisFail", function() {
 });
 // Đăng ký success
 socket.on("server--regisSuccess", function(username) {
-  $(".container").hide(1000);
-  $(".game-room").show(1000);
+  // $(".container").hide(1000);
+  console.log('server--regisSuccess');
+  $( ".container" ).hide( "drop", { direction: "down" }, "slow") ;
+  $(".game-room").show();
   $(".chat--username").html(username);
 });
 
