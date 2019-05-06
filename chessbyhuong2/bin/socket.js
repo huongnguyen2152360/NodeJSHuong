@@ -11,10 +11,10 @@ io.on("connection", function(socket) {
     if (allUsernames.indexOf(username) >= 0 | username == '') {
       socket.emit("server--regisFail");
     } else {
-      allUsernames.push({username: socketid});
+      allUsernames.push({'username': username, 'id': socketid});
       socket.username = username;
       socket.id = socketid;
-      socket.emit("server--regisSuccess", username, socketid);
+      socket.emit("server--regisSuccess", username);
       io.sockets.emit("server--usersOnline", allUsernames);
     }
   });
@@ -29,6 +29,12 @@ io.on("connection", function(socket) {
   socket.on("client--sendmsg", function(msg) {
     io.sockets.emit("server--sendmsg", { user: socket.username, content: msg });
   });
+
+  //Server receives challenge, sends to userB
+  socket.on("usera--challenge",function(usera,socketid) {
+    // socket.emit("server--receivechallenge", usera,socketid)
+    io.to(`${socketid}`).emit('server--receivechallenge', usera)
+  })
 });
 
 http.listen(5000, function() {
