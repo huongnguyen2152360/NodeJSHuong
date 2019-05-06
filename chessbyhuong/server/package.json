@@ -1,0 +1,14 @@
+{
+  "name": "chessgame",
+  "version": "1.0.0",
+  "description": "chessgame server",
+  "main": "index.js",
+  "author": "huongnguyen2152360",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon ./bin/socket --exec babel-node"
+  },
+  "dependencies": {
+    "nodemon": "^1.19.0"
+  }
+}
