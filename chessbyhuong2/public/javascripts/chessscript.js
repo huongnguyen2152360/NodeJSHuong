@@ -3,7 +3,6 @@ const cfg = {
     position: 'start',
     showNotation: false,
     draggable: true,
-  dropOffBoard: 'snapback',
+    dropOffBoard: 'snapback',
 };
 const board1 = ChessBoard('board1', cfg);
-$(window).resize(board.resize);

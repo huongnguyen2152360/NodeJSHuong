@@ -4,10 +4,13 @@ $(".game-room").hide();
 // Client đăng ký username
 $("#register-input").keypress(function(e) {
   let key = e.which;
-  if (key == 13) {
-    // the enter key code
+  if (key == 13) {// the enter key code
+    // get socket id
+    socket.on("connection", function() {
+      return socket.id
+    })
     $("#register-btn").click();
-    socket.emit("client--regisUsername", $("#register-input").val());
+    socket.emit("client--regisUsername", $("#register-input").val(),socket.id);
   }
 });
 
@@ -32,7 +35,7 @@ socket.on("server--usersOnline", function(usernames) {
       <div class="col-9 chat--list">
         <p id="chat--list-user">${e}</p>
       </div>
-      <div class="col-3">
+      <div class="col-3 chess-challenge">
           <img class="icon-challenge" data-toggle="tooltip" data-placement="right" title="Challenge this player" src="/images/challenge.png" alt="Challenge">
       </div>
     </div>`);
@@ -63,6 +66,20 @@ socket.on("server--sendmsg", function(msg) {
   $("#chat--input").val("");
 });
 
-//Draggable
-$( ".chess--piece" ).draggable();
-$(".square").droppable();
+// User click challenge
+// $('.icon-challenge').click(function() {
+//   console.log($(this));
+//   // console.log(socket.id);
+// })
+
+// $('.clicktest').click(() => {
+//   console.log('click test');
+// })
+$(document).on("click",".icon-challenge", function(username) {
+  // io.to(socket.id).emit('hey', 'I just met you');
+  $('#chat--list-user').html() = username
+  console.log($('#chat--list-user').html());
+  console.log(username);
+
+})
+
