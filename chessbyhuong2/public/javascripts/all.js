@@ -20,10 +20,11 @@ socket.on("server--regisFail", function () {
   $(".regis-notice").html(`<h5>User existed or Please enter your username to start.</h5>`);
 });
 // Đăng ký success
-socket.on("server--regisSuccess", function (username) {
+socket.on("server--regisSuccess", function (username, socketid) {
   $(".container").hide(1000);
   $(".game-room").show(1000);
   $(".chat--username").html(username);
+  $(".chat--id").html(socketid);
 });
 
 // Hiện users online
@@ -36,7 +37,7 @@ socket.on("server--usersOnline", function (usernames) {
         <p id="chat--list-user">${e.username}</p>
       </div>
       <div class="col-3 challengers--row">
-          <img class="icon-challenge" data-toggle="tooltip" data-placement="right" title="Challenge this player" src="/images/challenge.png" alt="Challenge">
+          <img class="icon-challenge" data-toggle="{tooltip,modal}" data-placement="right" title="Challenge this player" src="/images/challenge.png" alt="Challenge" data-target="#basicExampleModal">
           <div class="id-challenge" style="display:none;">${e.id}</div>
       </div>
     </div>`);
@@ -78,9 +79,14 @@ $(document).on("click", ".icon-challenge", function (socketid, usera) {
 
 //User receive challenge
 socket.on('server--receivechallenge', function (usera) {
-  // $('#basicExampleModal').css({ 'display': 'flex', 'opacity': 'unset' })
   $('#basicExampleModal').modal('show')
   $('.modal-body').html(`${usera} wants to challenge you!`)
 })
 
-usera
+//User B accept challenge
+$('.challenge--accept-btn').click(function (usera, userb) {
+  let str = $('.modal-body').html()
+  usera = str.substring(0, str.indexOf(" wants to challenge"))
+  userb = $('.chat--username').html()
+  socket.emit('createroom', usera, userb)
+})

@@ -51,10 +51,11 @@ body {
 
 .regis-notice h5 {
   font-style: italic;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   text-align: center;
-  color: #a40000;
+  color: indianred;
   letter-spacing: 0.1em;
+  font-weight: bold;
 }
 
 /* GAME ROOM */

@@ -53,7 +53,7 @@
           </div>
           <div class="col-5">
             <p>Hi, <span class="chat--username"></span></p>
-            <p>Enjoy!</p>
+            <p>Enjoy!<span class="chat--id" style="display:none;"></span></p>
           </div>
           <div class="col-3">
             <i class="fas fa-sign-out-alt sign-out-btn"></i>
@@ -78,7 +78,7 @@
     </div>
     <!-- CHESS BOARD -->
     <div class="game-area col-xl-7 col-lg-7 col-md-12">
-      <div id="board1" style="width: 500px;margin-top: 2rem;"></div>
+      <div id="board" style="width: 500px;margin-top: 2rem;"></div>
       <!-- End of chess--board -->
     </div>
     <!-- Challenge MODAL -->
@@ -95,7 +95,7 @@
           <div class="modal-body">
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-success">Accept</button>
+            <button type="button" class="btn btn-success challenge--accept-btn">Accept</button>
             <button type="button" class="btn btn-light" data-dismiss="modal">Decline</button>
           </div>
         </div>
@@ -123,7 +123,8 @@
   <!-- My JS -->
   <script src="/javascripts/all.js"></script>
   <!-- CHESSBOARD Js -->
-  <script src="/javascripts/chessboard-0.3.0.min.js"></script>
+  <script src="/javascripts/chessboard-0.3.0.js"></script>
+  <script src="/javascripts/chess.js"></script>
   <script src="/javascripts/chessscript.js"></script>
 </body>
 
