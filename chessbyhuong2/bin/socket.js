@@ -50,7 +50,13 @@ io.on("connection", function (socket) {
 
   // Create a room for userA and userB
   socket.on('createroom', function (usera, userb) {
-
+    rooms.push({ 'roomId': roomID, 'players': [usera, userb] })
+    // if (usera) {
+    //   color: 'white'
+    // } else {
+    //   color: 'black'
+    // }
+    socket.emit('rooms',rooms, roomID)
   })
 
 });
