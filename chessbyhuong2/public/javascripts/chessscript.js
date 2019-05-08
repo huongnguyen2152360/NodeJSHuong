@@ -1,6 +1,8 @@
-
-
-
+var board,
+game = new Chess(),
+statusEl = $('#status'),
+fenEl = $('#fen'),
+pgnEl = $('#pgn');
 
 var onDrop = function (source, target) {
     // see if the move is legal
@@ -124,5 +126,18 @@ var onSnapEnd = function () {
 };
 // END OF HIGHLIGHT LEGAL MOVES
 
+const cfg = {
+    // orientation: color,
+    pieceTheme: 'images/chesspieces/wikipedia/{piece}.png',
+    position: 'start',
+    draggable: true,
+    onDragStart: onDragStart,
+    onDrop: onDrop,
+    onMouseoutSquare: onMouseoutSquare,
+    onMouseoverSquare: onMouseoverSquare,
+    onSnapEnd: onSnapEnd
+};
+
+board = ChessBoard('board', cfg);
 
 updateStatus()

@@ -1,5 +1,5 @@
 var socket = io.connect("http://localhost:5000/");
-import Chess from './chess'
+// import Chess from './chess'
 $(".game-room").hide();
 
 
@@ -96,11 +96,11 @@ $('.challenge--accept-btn').click(function () {
 
 // Receive rooms info 
 socket.on('game--start', function (rooms, socketidA, socketidB) {
-  var board,
-    game = new Chess(),
-    statusEl = $('#status'),
-    fenEl = $('#fen'),
-    pgnEl = $('#pgn');
+  // var board,
+  //   game = new Chess(),
+  //   statusEl = $('#status'),
+  //   fenEl = $('#fen'),
+  //   pgnEl = $('#pgn');
   let color
   rooms.forEach(room => {
     for (let i = 0; i < room.players.length; i++) {
@@ -126,18 +126,18 @@ socket.on('game--start', function (rooms, socketidA, socketidB) {
       //orientation: color
     }
   };
-  const cfg = {
-    orientation: color,
-    pieceTheme: 'images/chesspieces/wikipedia/{piece}.png',
-    position: 'start',
-    draggable: true,
-    onDragStart: onDragStart,
-    onDrop: onDrop,
-    onMouseoutSquare: onMouseoutSquare,
-    onMouseoverSquare: onMouseoverSquare,
-    onSnapEnd: onSnapEnd
-};
+//   const cfg = {
+//     orientation: color,
+//     pieceTheme: 'images/chesspieces/wikipedia/{piece}.png',
+//     position: 'start',
+//     draggable: true,
+//     onDragStart: onDragStart,
+//     onDrop: onDrop,
+//     onMouseoutSquare: onMouseoutSquare,
+//     onMouseoverSquare: onMouseoverSquare,
+//     onSnapEnd: onSnapEnd
+// };
 
-board = ChessBoard('board', cfg);
+// board = ChessBoard('board', cfg);
 
 })
