@@ -1,5 +1,7 @@
 var socket = io.connect("http://localhost:5000/");
+import Chess from './chess'
 $(".game-room").hide();
+
 
 // Client đăng ký username
 $("#register-input").keypress(function (e) {
@@ -68,25 +70,74 @@ socket.on("server--sendmsg", function (msg) {
   $("#chat--input").val("");
 });
 
-// User click challenge
-$(document).on("click", ".icon-challenge", function (socketid, usera) {
-  //socketid of userB
-  socketid = $(this).parent().find('.id-challenge').html()
+// UserA click to challenge userB
+$(document).on("click", ".icon-challenge", function (socketidB, socketidA, usera) {
+  //socketid of users
+  socketidB = $(this).parent().find('.id-challenge').html()
+  socketidA = $('.chat--id').html()
   //username of userA
   usera = $('.chat--username').html()
-  socket.emit('usera--challenge', usera, socketid);
+  socket.emit('usera--challenge', usera, socketidB, socketidA);
 })
 
-//User receive challenge
-socket.on('server--receivechallenge', function (usera) {
+//UserB receive challenge
+socket.on('server--receivechallenge', function (usera, socketidA) {
   $('#basicExampleModal').modal('show')
-  $('.modal-body').html(`${usera} wants to challenge you!`)
+  $('.modal-body1').html(`${usera} wants to challenge you!`)
+  $('.modal-body2').html(socketidA)
 })
 
 //User B accept challenge
-$('.challenge--accept-btn').click(function (usera, userb) {
-  let str = $('.modal-body').html()
-  usera = str.substring(0, str.indexOf(" wants to challenge"))
-  userb = $('.chat--username').html()
-  socket.emit('createroom', usera, userb)
+$('.challenge--accept-btn').click(function () {
+  let socketidA = $('.modal-body2').html()
+  let socketidB = $('.chat--id').html()
+  socket.emit('createroom', socketidA, socketidB)
+})
+
+// Receive rooms info 
+socket.on('game--start', function (rooms, socketidA, socketidB) {
+  var board,
+    game = new Chess(),
+    statusEl = $('#status'),
+    fenEl = $('#fen'),
+    pgnEl = $('#pgn');
+  let color
+  rooms.forEach(room => {
+    for (let i = 0; i < room.players.length; i++) {
+      if (i % 2 == 0) {
+        return color = "white"
+      } else {
+        return color = "black"
+      }
+    }
+  })
+  
+  // ONLY ALLOW LEGAL MOVES
+  
+  // do not pick up pieces if the game is over
+  // only pick up pieces for the side to move
+  var onDragStart = function (source, piece, position, orientation) {
+    if (game.game_over() === true ||
+      (game.turn() === 'w' && piece.search(/^b/) !== -1) ||
+      (game.turn() === 'b' && piece.search(/^w/) !== -1) ||
+      (game.turn() === 'w' && color === 'black') ||
+      (game.turn() === 'b' && color === 'white')) {
+      return false;
+      //orientation: color
+    }
+  };
+  const cfg = {
+    orientation: color,
+    pieceTheme: 'images/chesspieces/wikipedia/{piece}.png',
+    position: 'start',
+    draggable: true,
+    onDragStart: onDragStart,
+    onDrop: onDrop,
+    onMouseoutSquare: onMouseoutSquare,
+    onMouseoverSquare: onMouseoverSquare,
+    onSnapEnd: onSnapEnd
+};
+
+board = ChessBoard('board', cfg);
+
 })

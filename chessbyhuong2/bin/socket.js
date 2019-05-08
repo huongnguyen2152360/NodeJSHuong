@@ -2,7 +2,7 @@ const app = require("../app");
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
 const allUsernames = [];
-const roomID = Math.random().toString(36).substring(2, 13)
+// const roomID = Math.random().toString(36).substring(2, 13)
 const rooms = []
 
 io.on("connection", function (socket) {
@@ -43,20 +43,17 @@ io.on("connection", function (socket) {
   });
 
   //Server receives challenge, sends to userB
-  socket.on("usera--challenge", function (usera, socketid) {
-    // socket.emit("server--receivechallenge", usera,socketid)
-    io.to(`${socketid}`).emit('server--receivechallenge', usera)
+  socket.on("usera--challenge", function (usera, socketidB, socketidA) {
+    io.to(`${socketidB}`).emit('server--receivechallenge', usera, socketidA)
   })
 
   // Create a room for userA and userB
-  socket.on('createroom', function (usera, userb) {
-    rooms.push({ 'roomId': roomID, 'players': [usera, userb] })
-    // if (usera) {
-    //   color: 'white'
-    // } else {
-    //   color: 'black'
-    // }
-    socket.emit('rooms',rooms, roomID)
+  socket.on('createroom', function (socketidA, socketidB) {
+    socket.join(socketidA)
+    rooms.push({ 'roomID': socketidA, players: [socketidA, socketidB] })
+    io.in(socketidA).emit('game--start', rooms, socketidA, socketidB)
+    // let roomA = io.sockets.adapter.rooms[socketidA]
+    // console.log(roomA.length);
   })
 
 });

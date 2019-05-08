@@ -1,19 +1,6 @@
-var board,
-    game = new Chess(),
-    statusEl = $('#status'),
-    fenEl = $('#fen'),
-    pgnEl = $('#pgn');
 
-// ONLY ALLOW LEGAL MOVES
-// do not pick up pieces if the game is over
-// only pick up pieces for the side to move
-var onDragStart = function (source, piece, position, orientation) {
-    if (game.game_over() === true ||
-        (game.turn() === 'w' && piece.search(/^b/) !== -1) ||
-        (game.turn() === 'b' && piece.search(/^w/) !== -1)) {
-        return false;
-    }
-};
+
+
 
 var onDrop = function (source, target) {
     // see if the move is legal
@@ -137,17 +124,5 @@ var onSnapEnd = function () {
 };
 // END OF HIGHLIGHT LEGAL MOVES
 
-const cfg = {
-    pieceTheme: 'images/chesspieces/wikipedia/{piece}.png',
-    position: 'start',
-    draggable: true,
-    onDragStart: onDragStart,
-    onDrop: onDrop,
-    onMouseoutSquare: onMouseoutSquare,
-    onMouseoverSquare: onMouseoverSquare,
-    onSnapEnd: onSnapEnd
-};
-
-board = ChessBoard('board', cfg);
 
 updateStatus()
