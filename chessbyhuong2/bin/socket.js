@@ -2,6 +2,7 @@ const app = require("../app");
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
 const allUsernames = [];
+const turnColor = ["white", "black"]
 // const roomID = Math.random().toString(36).substring(2, 13)
 const rooms = []
 
@@ -51,10 +52,35 @@ io.on("connection", function (socket) {
   socket.on('createroom', function (socketidA, socketidB) {
     socket.join(socketidA)
     rooms.push({ 'roomID': socketidA, players: [socketidA, socketidB] })
-    io.in(socketidA).emit('game--start', rooms, socketidA, socketidB)
-    // let roomA = io.sockets.adapter.rooms[socketidA]
-    // console.log(roomA.length);
+    // socket.emit('rooms',rooms)
+    // for (let i = 0; i < rooms[0].players.length; i++) {
+    //   if (i % 2 == 0) {
+    //     color = "white"
+    //   } else {
+    //     color = "black"
+    //   }
+    // }
+    io.sockets.emit('rooms', rooms)
+    // io.in(socketidA).emit('game--start', rooms, color)
   })
+
+  socket.on('rooms', function(rooms) {
+    console.log(rooms);
+  })
+
+  // Set color
+  // console.log(rooms);
+  // rooms.forEach(room => {
+  //   for (let i = 0; i < room.players.length; i++) {
+  //     if (i % 2 == 0) {
+  //       return color = "black"
+  //     } else {
+  //       return color = "white"
+  //     }
+  //   }
+  //   io.in(`${room.players[0]}`).emit('color', rooms, color)   
+  // })
+
 
 });
 

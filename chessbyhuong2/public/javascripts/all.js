@@ -95,25 +95,40 @@ $('.challenge--accept-btn').click(function () {
 })
 
 // Receive rooms info 
-socket.on('game--start', function (rooms, socketidA, socketidB) {
-  // var board,
-  //   game = new Chess(),
-  //   statusEl = $('#status'),
-  //   fenEl = $('#fen'),
-  //   pgnEl = $('#pgn');
-  let color
-  rooms.forEach(room => {
-    for (let i = 0; i < room.players.length; i++) {
-      if (i % 2 == 0) {
-        return color = "white"
-      } else {
-        return color = "black"
-      }
+socket.on('rooms', function (rooms) {
+  for (let i = 0; i < rooms[0].players.length; i++) {
+    if (i % 2 == 0) {
+      color = "white"
+    } else {
+      color = "black"
     }
-  })
-  
+  }
+  socket.emit('game--start', rooms, color)
+})
+
+socket.on('game--start', function (rooms, color) {
+
+  let game = new Chess(),
+    statusEl = $('#status'),
+    fenEl = $('#fen'),
+    pgnEl = $('#pgn');
+  console.log(color);
+  // let color
+  //  console.log(rooms);
+  //  if (rooms[0].players[0])
+  // rooms.forEach(room => {
+  //   for (let i = 0; i < room.players.length; i++) {
+  //     if (i % 2 == 0) {
+  //       color = "white"
+  //       socket.emit()
+  //     } else {
+  //       return color = "black"
+  //     }
+  //   }
+  // })
+
   // ONLY ALLOW LEGAL MOVES
-  
+
   // do not pick up pieces if the game is over
   // only pick up pieces for the side to move
   var onDragStart = function (source, piece, position, orientation) {
@@ -123,21 +138,20 @@ socket.on('game--start', function (rooms, socketidA, socketidB) {
       (game.turn() === 'w' && color === 'black') ||
       (game.turn() === 'b' && color === 'white')) {
       return false;
-      //orientation: color
     }
   };
-//   const cfg = {
-//     orientation: color,
-//     pieceTheme: 'images/chesspieces/wikipedia/{piece}.png',
-//     position: 'start',
-//     draggable: true,
-//     onDragStart: onDragStart,
-//     onDrop: onDrop,
-//     onMouseoutSquare: onMouseoutSquare,
-//     onMouseoverSquare: onMouseoverSquare,
-//     onSnapEnd: onSnapEnd
-// };
+  const cfg = {
+    // orientation: color,
+    pieceTheme: 'images/chesspieces/wikipedia/{piece}.png',
+    position: 'start',
+    draggable: true,
+    onDragStart: onDragStart,
+    onDrop: onDrop,
+    onMouseoutSquare: onMouseoutSquare,
+    onMouseoverSquare: onMouseoverSquare,
+    onSnapEnd: onSnapEnd
+  };
 
-// board = ChessBoard('board', cfg);
+  let board = ChessBoard('board', cfg);
 
 })
